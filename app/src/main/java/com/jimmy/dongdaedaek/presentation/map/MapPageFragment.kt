@@ -57,14 +57,16 @@ class MapPageFragment : ScopeFragment(), MapPageContract.View, OnMapReadyCallbac
         naverMap.moveCamera(cameraUpdate)
 
         Log.d("Map..", "${argument.store}")
-        argument.store?.latLng?.let{
+        argument.store?.latLng?.let{customLatlng->
 
             Log.d("Map..", "let..")
+            customLatlng.toNaverLatlng()?.let{
+                val storePosition = CameraPosition(it, 16.5)
+                val cameraUpdatePos = CameraUpdate.toCameraPosition(storePosition)
+                    .animate(CameraAnimation.Easing)
+                naverMap.moveCamera(cameraUpdatePos)
+            }
 
-            val storePosition = CameraPosition(it, 16.5)
-            val cameraUpdate = CameraUpdate.toCameraPosition(storePosition)
-                .animate(CameraAnimation.Easing)
-            naverMap.moveCamera(cameraUpdate)
         }
     }
 

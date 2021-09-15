@@ -9,6 +9,7 @@ plugins {
 
 }
 apply plugin: 'kotlin-android'
+apply plugin: 'koin'
 
 
 Properties properties = new Properties()
@@ -58,10 +59,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.3'
     // Koin
-    implementation 'org.koin:koin-core:2.2.2'
-    implementation 'org.koin:koin-android-scope:2.2.2'
-    implementation 'org.koin:koin-android-ext:2.2.2'
-    implementation 'org.koin:koin-androidx-fragment:2.2.2'
+    implementation "io.insert-koin:koin-core:$koin_version"
+    implementation "io.insert-koin:koin-android-scope:$koin_version"
+    implementation "io.insert-koin:koin-android-ext:$koin_version"
+    implementation "io.insert-koin:koin-androidx-fragment:$koin_version"
     // Firebase Services
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'

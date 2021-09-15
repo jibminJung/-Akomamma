@@ -48,22 +48,14 @@ class ExploreFragment : ScopeFragment(),ExploreContract.View{
 
     override fun onStart() {
         super.onStart()
-        Log.d("logging in...",activity?.intent?.action.toString())
-        Log.d("logging in...",activity?.intent?.data.toString())
-        Log.d("logging in...",activity?.intent?.type.toString())
-        Log.d("logging in...",activity?.intent?.flags.toString())
-        Log.d("logging in...",activity?.intent?.categories.toString())
-        Log.d("logging in...",activity?.intent?.type.toString())
+        checkLoginIntent()
+    }
 
-
-        activity?.intent?.data?.let{
-
+    private fun checkLoginIntent() {
+        activity?.intent?.data?.let {
             presenter.checkLogin(requireActivity().intent.data.toString())
-
             requireActivity().intent.data = null
         }
-
-
     }
 
     private fun initView() {

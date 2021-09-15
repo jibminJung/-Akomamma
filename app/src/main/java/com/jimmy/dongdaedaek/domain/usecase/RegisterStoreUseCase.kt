@@ -3,6 +3,7 @@ package com.jimmy.dongdaedaek.domain.usecase
 import com.google.firebase.auth.FirebaseAuth
 import com.jimmy.dongdaedaek.NullUserException
 import com.jimmy.dongdaedaek.data.repository.StoreRepository
+import com.jimmy.dongdaedaek.domain.model.CustomLatLng
 import com.jimmy.dongdaedaek.domain.model.Store
 import com.naver.maps.geometry.LatLng
 
@@ -26,7 +27,7 @@ class RegisterStoreUseCase(
             title = name,
             category = category,
             address = address,
-            latLng = latlng,
+            latLng = CustomLatLng(latlng.latitude,latlng.longitude),
             numberOfReview = 0,
             rating = "0"
         )

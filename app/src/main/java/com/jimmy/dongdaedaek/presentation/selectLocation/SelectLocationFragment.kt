@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import com.jimmy.dongdaedaek.BuildConfig
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentSelectLocationBinding
-import com.jimmy.dongdaedaek.extension.isEllipsized
 import com.jimmy.dongdaedaek.extension.setNavigationResult
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*

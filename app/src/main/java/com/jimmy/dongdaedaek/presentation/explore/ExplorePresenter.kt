@@ -26,7 +26,8 @@ val checkLinkAndLogin:CheckLinkAndLoginUseCase):ExploreContract.Presenter {
             val stores = getStoresUseCase()
             view.showStores(stores)
         }catch (e:Exception){
-
+            Log.e("fetch store exception",e.message?:"")
+            view.showErrorToast()
         }finally {
             view.hideProgressBar()
         }
@@ -40,6 +41,7 @@ val checkLinkAndLogin:CheckLinkAndLoginUseCase):ExploreContract.Presenter {
                 checkLinkAndLogin(uri)
                 view.showLoginSuccessToast()
             } catch (e: Exception) {
+                Log.e("login check exception",e.message?:"")
                 view.showErrorToast()
             } finally {
                 view.hideProgressBar()

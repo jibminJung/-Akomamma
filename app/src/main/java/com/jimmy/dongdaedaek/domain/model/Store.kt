@@ -14,5 +14,5 @@ data class Store(
     val category:List<String>?=null,
     val rating:String?=null,
     val numberOfReview:Int?=null,
-    val latLng: LatLng?=null
+    val latLng: CustomLatLng?=null
 ):Parcelable
