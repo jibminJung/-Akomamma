@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_explore">
+
+    <fragment
+        android:id="@+id/navigation_explore"
+        android:name="com.jimmy.dongdaedaek.presentation.explore.ExploreFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_explore">
+
+        <action
+            android:id="@+id/to_add_store_action"
+            app:destination="@id/navigation_add_store"
+            app:enterAnim="@anim/fade_in"
+            />
+
+
+        <action
+            android:id="@+id/to_store_information_action"
+            app:destination="@id/navigation_store_information"
+            app:enterAnim="@anim/enter_sliding">
+            <argument
+                android:name="store"
+                app:argType="com.jimmy.dongdaedaek.domain.model.Store"/>
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_map_page"
+        android:name="com.jimmy.dongdaedaek.presentation.map.MapPageFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_map_page" >
+
+        <argument
+            app:nullable="true"
+            android:name="store"
+            android:defaultValue="@null"
+            app:argType="com.jimmy.dongdaedaek.domain.model.Store"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_my_page"
+        android:name="com.jimmy.dongdaedaek.presentation.mypage.MyPageFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_my_page">
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_store_information"
+        android:name="com.jimmy.dongdaedaek.presentation.storeinformation.StoreInformationFragment"
+        android:label="상세"
+        tools:layout="@layout/fragment_store_information">
+
+        <argument
+            android:name="store"
+            app:argType="com.jimmy.dongdaedaek.domain.model.Store"/>
+
+        <action
+            android:id="@+id/to_store_location"
+            app:destination="@id/navigation_map_page">
+            <argument
+                android:name="store"
+                app:nullable="true"
+                app:argType="com.jimmy.dongdaedaek.domain.model.Store"
+                android:defaultValue="@null"/>
+
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_add_store"
+        android:name="com.jimmy.dongdaedaek.presentation.addStore.AddStoreFragment"
+        android:label="맛집 추가"
+        tools:layout="@layout/fragment_add_store"
+        >
+        <action
+            android:id="@+id/to_select_location"
+            app:destination="@id/navigation_select_location"
+            />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_select_location"
+        android:name="com.jimmy.dongdaedaek.presentation.selectLocation.SelectLocationFragment"
+        tools:layout="@layout/fragment_select_location"
+        android:label="위치 선택하기"
+        >
+
+    </fragment>
+
+</navigation>

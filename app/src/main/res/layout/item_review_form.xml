@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="70dp">
+
+    <EditText
+        android:inputType="text"
+        android:id="@+id/review_text_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@null"
+        android:padding="8dp"
+        android:hint="후기를 남겨보세요!.."
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/rating_bar"
+        app:layout_constraintEnd_toStartOf="@id/submit_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="리뷰를 입력해주세요..." />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/rating_bar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:isIndicator="false"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:hapticFeedbackEnabled="true"
+        android:numStars="5"
+        android:rating="3"
+        android:progressTint="@color/orange"
+        android:transformPivotX="0dp"
+        android:transformPivotY="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/review_text_edit_text"
+        app:layout_constraintTop_toBottomOf="@id/review_text_edit_text" />
+
+    <TextView
+        android:id="@+id/rating_score_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:text="3"
+        app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+        app:layout_constraintStart_toEndOf="@id/rating_bar"
+        app:layout_constraintTop_toTopOf="@id/rating_bar"
+        tools:text="2.5" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submit_button"
+        android:layout_width="25dp"
+        android:layout_marginHorizontal="5dp"
+        android:layout_height="25dp"
+        android:background="@drawable/ic_baseline_arrow_upward_24_orange"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/review_text_edit_text"
+        app:layout_constraintTop_toTopOf="@id/review_text_edit_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

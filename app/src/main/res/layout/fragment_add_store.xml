@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/store_name_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="@null"
+        android:layout_marginTop="30dp"
+        android:hint="맛집 이름을 입력해주세요"
+        android:inputType="text"
+        android:paddingStart="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/store_address_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:ellipsize="start"
+        android:maxLines="2"
+        android:padding="10dp"
+        android:text="지도에서 주소를 찾아서 입력"
+        app:layout_constraintEnd_toStartOf="@id/map_search_button"
+        app:layout_constraintHorizontal_weight="7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/store_name_edit_text" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/map_search_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/orange"
+        android:drawableStart="@drawable/ic_baseline_search_24"
+        android:minWidth="@null"
+        android:minHeight="@null"
+
+
+        android:text="찾기"
+        app:layout_constraintBottom_toBottomOf="@id/store_address_text_view"
+        app:layout_constraintEnd_toEndOf="@id/store_name_edit_text"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintStart_toEndOf="@id/store_address_text_view"
+        app:layout_constraintTop_toTopOf="@id/store_address_text_view"
+
+        />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/category_chip_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:layout_constraintTop_toBottomOf="@id/store_address_text_view"
+        tools:layout_height="200dp">
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/register_store_button"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="start"
+            android:paddingHorizontal="20dp"
+            android:backgroundTint="@color/orange"
+            android:minHeight="@null"
+            android:minWidth="@null"
+            android:drawablePadding="0dp"
+            android:maxLines="1"
+            android:text="등록하기" />
+
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="false"
+        android:id="@+id/progress_view"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/orange"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="잠시만 기다려주세요.."/>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
