@@ -7,7 +7,6 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import com.jimmy.dongdaedaek.BuildConfig
 import com.jimmy.dongdaedaek.data.api.*
-import com.jimmy.dongdaedaek.data.api.Url.TMAP_API_URL
 import com.jimmy.dongdaedaek.data.preference.PreferenceManager
 import com.jimmy.dongdaedaek.data.preference.SharedPreferenceManager
 import com.jimmy.dongdaedaek.data.repository.*
