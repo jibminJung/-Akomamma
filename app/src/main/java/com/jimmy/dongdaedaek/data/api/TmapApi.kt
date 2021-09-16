@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface TmapApi {
 
-    @GET("tmap/geo/reversegeocoding?version=1&addressType=A10&appKey=${BuildConfig.TMAP_API_KEY}")
+    @GET("tmap/geo/reversegeocoding?version=1&addressType=A03&appKey=${BuildConfig.TMAP_API_KEY}")
     suspend fun getLocationName(
         @Query("lat") lat: Double,
         @Query("lon") lon: Double
