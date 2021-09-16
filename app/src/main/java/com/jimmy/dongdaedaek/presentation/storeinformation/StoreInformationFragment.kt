@@ -2,12 +2,15 @@ package com.jimmy.dongdaedaek.presentation.storeinformation
 
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
@@ -19,14 +22,21 @@ import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.extension.toGone
 import com.jimmy.dongdaedaek.extension.toVisible
 import org.koin.android.scope.ScopeFragment
-import org.koin.core.component.bind
 import org.koin.core.parameter.parametersOf
 
 class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View {
     override val presenter: StoreInformationContract.Presenter by inject { parametersOf(arguments.store) }
     val arguments: StoreInformationFragmentArgs by navArgs()
     private var binding: FragmentStoreInformationBinding? = null
+    private var photoList : MutableList<Uri> = mutableListOf()
+    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri?->
+        // Callback function.. Handle the returned Uri
+        Log.d("getContent","uri: ${uri?:""}")
+        uri?.let{
+            (binding?.reviewForm?.thumbRecyclerView?.adapter as? ImageRecyclerAdapter)?.addData(uri)
+        }
 
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +49,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
         super.onViewCreated(view, savedInstanceState)
         initView()
         bindView()
+
         presenter.onViewCreated()
     }
 
@@ -57,6 +68,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
     fun initView() {
         binding?.storeInformationRecyclerView?.adapter = StoreInformationAdapter()
         binding?.storeInformationRecyclerView?.layoutManager = LinearLayoutManager(context)
+        binding?.reviewForm?.thumbRecyclerView?.adapter = ImageRecyclerAdapter()
 
     }
 
@@ -83,7 +95,8 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
                 reviewForm.ratingScoreTextView.text = rating.toString()
             }
             reviewForm.imageAddButton.setOnClickListener {
-                //check permission for storage
+                //check permission for storage and get Content
+                checkExternalStoragePermission()
             }
 
         }
@@ -95,7 +108,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
                 requireContext(),
                 android.Manifest.permission.READ_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED -> {
-
+                getContent.launch("image/*")
             }
             else -> {
                 requestPermissions(
@@ -111,14 +124,11 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
         when (requestCode) {
             PERMISSION_REQUEST_CODE ->
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+                    getContent.launch("image/*")
                 } else {
                     Toast.makeText(context, "권한을 거부하셨습니다.", Toast.LENGTH_SHORT).show()
                 }
         }
-    }
-    fun getImageFromExternalStorage(){
-
     }
 
 
