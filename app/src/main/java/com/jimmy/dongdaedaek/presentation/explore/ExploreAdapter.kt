@@ -45,7 +45,6 @@ class ExploreAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         @SuppressLint("SetTextI18n")
         fun bind(item: Store) {
             binding.storeNameTextView.text=item.title?:"이름 없음"
-
             binding.ratingTextView.text = item.rating?:"?"
         }
     }

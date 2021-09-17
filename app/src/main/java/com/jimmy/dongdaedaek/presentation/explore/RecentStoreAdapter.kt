@@ -29,6 +29,7 @@ class RecentStoreAdapter:RecyclerView.Adapter<RecentStoreAdapter.RecentStoreView
         fun bind(item:Store){
             binding.recentStoreNameTextView.text=item.title
             binding.ratingTextView.text = item.rating
+
         }
     }
 }

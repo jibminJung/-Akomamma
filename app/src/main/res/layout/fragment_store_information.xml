@@ -27,7 +27,7 @@
         tools:text="Hello" />
 
     <TextView
-        android:id="@+id/store_description_text_view"
+        android:id="@+id/store_category_chip_group"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -62,7 +62,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@id/store_description_text_view" />
+        app:layout_constraintTop_toBottomOf="@id/store_category_chip_group" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/wish_button"
@@ -121,14 +121,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:alpha="0.5"
-        android:background="@null"
+        android:background="@color/gray"
+        android:orientation="vertical"
         android:clickable="true"
         android:gravity="center"
         android:visibility="gone">
 
         <ProgressBar
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 

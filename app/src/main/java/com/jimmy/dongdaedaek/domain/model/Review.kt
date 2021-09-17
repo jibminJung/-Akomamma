@@ -16,5 +16,6 @@ data class Review(
     @ServerTimestamp
     val createdAt: Date? = null,
     val rating:Float?=null,
-    val userId:String?=null
+    val userId:String?=null,
+    val photos:List<String>?=null
 ):Parcelable

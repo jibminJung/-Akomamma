@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,15 +27,16 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
     override val presenter: StoreInformationContract.Presenter by inject { parametersOf(arguments.store) }
     val arguments: StoreInformationFragmentArgs by navArgs()
     private var binding: FragmentStoreInformationBinding? = null
-    private var photoList : MutableList<Uri> = mutableListOf()
-    val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){ uri: Uri?->
-        // Callback function.. Handle the returned Uri
-        Log.d("getContent","uri: ${uri?:""}")
-        uri?.let{
-            (binding?.reviewForm?.thumbRecyclerView?.adapter as? ImageRecyclerAdapter)?.addData(uri)
+    var imageRecyclerAdapter:ImageRecyclerAdapter? = null
+    val getContent =
+        registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { list: List<Uri> ->
+            // Callback function.. Handle the returned Uri
+            if (list.isNotEmpty()) {
+                (binding?.reviewForm?.thumbRecyclerView?.adapter as? ImageRecyclerAdapter)?.addData(list)
+            }
+
         }
 
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,7 +68,10 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
     fun initView() {
         binding?.storeInformationRecyclerView?.adapter = StoreInformationAdapter()
         binding?.storeInformationRecyclerView?.layoutManager = LinearLayoutManager(context)
-        binding?.reviewForm?.thumbRecyclerView?.adapter = ImageRecyclerAdapter()
+        binding?.reviewForm?.thumbRecyclerView?.adapter = ImageRecyclerAdapter().also {
+            imageRecyclerAdapter = it
+        }
+
 
     }
 
@@ -83,13 +86,14 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
             reviewForm.submitButton.setOnClickListener {
                 presenter.requestSubmitReview(
                     reviewForm.reviewTextEditText.text.toString(),
-                    reviewForm.ratingBar.rating
+                    reviewForm.ratingBar.rating,
+                    imageRecyclerAdapter?.data
                 )
                 hideKeyboard()
                 reviewForm.reviewTextEditText.text.clear()
             }
             reviewForm.reviewTextEditText.addTextChangedListener { editable ->
-                reviewForm.submitButton.isEnabled = (editable?.length ?: 0 > 5)
+                reviewForm.submitButton.isEnabled = (editable?.length ?: 0 > 3)
             }
             reviewForm.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
                 reviewForm.ratingScoreTextView.text = rating.toString()
@@ -101,6 +105,12 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
 
         }
     }
+
+    override fun clearImageInput() {
+        imageRecyclerAdapter?.data?.clear()
+        imageRecyclerAdapter?.notifyDataSetChanged()
+    }
+
 
     private fun checkExternalStoragePermission() {
         when {
@@ -118,7 +128,12 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
             }
         }
     }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         when (requestCode) {
@@ -155,6 +170,10 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
 
     override fun showErrorToast() {
         Toast.makeText(context, "에러가 발생하였습니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showToastMsg(msg: String) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun refreshReviewData(reviews: List<Review>) {

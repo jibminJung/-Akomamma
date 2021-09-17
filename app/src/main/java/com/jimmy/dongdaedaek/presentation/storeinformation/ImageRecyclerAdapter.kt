@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.ItemImageBinding
 
 class ImageRecyclerAdapter: RecyclerView.Adapter<ImageRecyclerAdapter.ImageHolder>() {
@@ -25,11 +26,13 @@ class ImageRecyclerAdapter: RecyclerView.Adapter<ImageRecyclerAdapter.ImageHolde
         fun bind(uri: Uri) {
             Glide.with(binding.root)
                 .load(uri)
+                .override(50,75)
+                .placeholder(R.drawable.ic_baseline_timelapse_24)
                 .into(binding.imageViewHolder)
         }
     }
-    fun addData(uri: Uri){
-        data.add(uri)
+    fun addData(list: List<Uri>){
+        data.addAll(list)
         notifyDataSetChanged()
     }
 

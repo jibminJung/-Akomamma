@@ -61,6 +61,7 @@ val dataModule = module {
     single<ReviewRepository> { ReviewRepositoryImpl(get(), get()) }
     single { TmapRepository(get(), get()) }
     single { CategoryRepository(get(), get()) }
+    single { ImageRepository(get(), get()) }
 
     // Api
     single {
@@ -90,13 +91,14 @@ val dataModule = module {
 val domainModule = module {
     factory { GetStoresUseCase(get()) }
     factory { GetReviewUseCase(get()) }
-    factory { UploadReviewUseCase(get()) }
+    factory { UploadReviewUseCase(get(),get()) }
     factory { RequestLoginUseCase(get(), get(), get()) }
     factory { CheckLinkAndLoginUseCase(get(), get(), get()) }
     factory { GetCurrentUserEmail(get(), get()) }
     factory { LogoutUseCase(get(), get()) }
     factory { FindLocationUseCase(get()) }
     factory { RegisterStoreUseCase(get(),get()) }
+    factory { UploadPhotosUseCase(get()) }
 }
 val presenterModule = module {
     scope<ExploreFragment> {
@@ -104,7 +106,7 @@ val presenterModule = module {
     }
     scope<StoreInformationFragment> {
         scoped<StoreInformationContract.Presenter> { (store: Store) ->
-            StoreInformationPresenter(store, getSource(), get(), get())
+            StoreInformationPresenter(store, getSource(), get(), get(),get(),get())
         }
     }
     scope<MyPageFragment> {

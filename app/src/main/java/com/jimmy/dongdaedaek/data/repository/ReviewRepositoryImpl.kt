@@ -8,9 +8,10 @@ import kotlinx.coroutines.withContext
 
 class ReviewRepositoryImpl(
     val reviewApi:ReviewApi,
-    val dispatcher: CoroutineDispatcher
+    val dispatcher: CoroutineDispatcher,
 ):ReviewRepository {
     override suspend fun getStoreReview(storeId: String): List<Review> = withContext(dispatcher){
+
         reviewApi.getStoreReview(storeId)
     }
 
