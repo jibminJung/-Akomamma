@@ -1,14 +1,19 @@
 package com.jimmy.dongdaedaek.presentation.explore
 
 import android.annotation.SuppressLint
+import android.util.AttributeSet
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import com.jimmy.dongdaedaek.databinding.ItemStoreBinding
 import com.jimmy.dongdaedaek.domain.model.Store
+import com.jimmy.dongdaedaek.extension.toGone
 
 class ExploreAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var data:List<Store> = listOf()
@@ -45,7 +50,23 @@ class ExploreAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         @SuppressLint("SetTextI18n")
         fun bind(item: Store) {
             binding.storeNameTextView.text=item.title?:"이름 없음"
-            binding.ratingTextView.text = item.rating?:"?"
+            binding.ratingTextView.text = item.rating?.take(4)?:"?"
+            item.recentPhoto?.let{
+                Glide.with(binding.root)
+                    .load(item.recentPhoto)
+                    .centerCrop()
+                    .into(binding.storeImageView)
+
+            }?:run{
+                binding.storeImageView.toGone()
+            }
+            item.category?.forEach {
+                binding.storeCategoryChipGroup.addView(Chip(binding.root.context).apply {
+                    text = it
+                    isClickable = false
+                })
+            }
+
         }
     }
 

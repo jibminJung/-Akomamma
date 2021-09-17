@@ -10,7 +10,7 @@ import android.util.Log
 import com.google.firebase.firestore.Query
 
 class ReviewApiImpl(
-    val firebaseFirestore: FirebaseFirestore
+    private val firebaseFirestore: FirebaseFirestore
 ):ReviewApi {
     override suspend fun getStoreReview(storeId: String): List<Review> =
         firebaseFirestore.collection("reviews")
@@ -37,8 +37,10 @@ class ReviewApiImpl(
                 storeRef,
                 store!!.copy(
                     rating = newRating.toString(),
-                    numberOfReview = beforeNumberOfReview+1
-                )
+                    numberOfReview = beforeNumberOfReview+1,
+                    recentPhoto = review.photos?.firstOrNull()
+                ),
+                SetOptions.merge()
             )
 
             transaction.set(

@@ -66,7 +66,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
     }
 
     fun initView() {
-        binding?.storeInformationRecyclerView?.adapter = StoreInformationAdapter()
+        binding?.storeInformationRecyclerView?.adapter = ReviewListAdapter()
         binding?.storeInformationRecyclerView?.layoutManager = LinearLayoutManager(context)
         binding?.reviewForm?.thumbRecyclerView?.adapter = ImageRecyclerAdapter().also {
             imageRecyclerAdapter = it
@@ -93,7 +93,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
                 reviewForm.reviewTextEditText.text.clear()
             }
             reviewForm.reviewTextEditText.addTextChangedListener { editable ->
-                reviewForm.submitButton.isEnabled = (editable?.length ?: 0 > 3)
+                reviewForm.submitButton.isEnabled = (editable?.length ?: 0 > 1)
             }
             reviewForm.ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
                 reviewForm.ratingScoreTextView.text = rating.toString()
@@ -148,7 +148,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
 
 
     override fun addReviewData(reviews: List<Review>) {
-        (binding?.storeInformationRecyclerView?.adapter as StoreInformationAdapter).apply {
+        (binding?.storeInformationRecyclerView?.adapter as ReviewListAdapter).apply {
             addReviewData(reviews)
             notifyDataSetChanged()
         }
@@ -177,7 +177,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
     }
 
     override fun refreshReviewData(reviews: List<Review>) {
-        (binding?.storeInformationRecyclerView?.adapter as StoreInformationAdapter).apply {
+        (binding?.storeInformationRecyclerView?.adapter as ReviewListAdapter).apply {
             clearReviewData()
             addReviewData(reviews)
             notifyDataSetChanged()

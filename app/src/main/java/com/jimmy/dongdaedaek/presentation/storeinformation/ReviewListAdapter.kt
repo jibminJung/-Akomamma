@@ -2,17 +2,30 @@ package com.jimmy.dongdaedaek.presentation.storeinformation
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
 import com.jimmy.dongdaedaek.databinding.ItemReviewBinding
-import com.jimmy.dongdaedaek.databinding.ItemReviewFormBinding
 import com.jimmy.dongdaedaek.domain.model.Review
 import com.jimmy.dongdaedaek.extension.toDecimalFormatString
+import java.text.SimpleDateFormat
 
-class StoreInformationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ReviewListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val data = ArrayList<DataItem>()
 
+    inner class ReviewItemViewHolder(val binding: ItemReviewBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: Review) {
+            item.photos?.let{
+                binding.photoRecyclerView.adapter = ReviewPhotoAdapter().apply {
+                    data.addAll(item.photos)
+                }
+            }
+            binding.userIdTextView.text = "${item.userId?.take(2)}***"
+            binding.contentTextView.text = item.reviewText
+            binding.dateTextView.text = DATE_FORMAT.format(item.createdAt!!)
+            binding.ratingTextView.text = item.rating?.toDecimalFormatString("0.0")
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         ReviewItemViewHolder(
@@ -34,15 +47,7 @@ class StoreInformationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
 
     override fun getItemCount(): Int = data.size
 
-    inner class ReviewItemViewHolder(val binding: ItemReviewBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Review) {
-            binding.userIdTextView.text = "${item.userId?.take(2)}***"
-            binding.contentTextView.text = item.reviewText
-            binding.dateTextView.text = item.createdAt.toString()
-            binding.ratingTextView.text = item.rating?.toDecimalFormatString("0.0")
-        }
-    }
+
 
     fun addReviewData(reviews: List<Review>) {
         reviews.forEach {
@@ -55,9 +60,9 @@ class StoreInformationAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() 
     }
 
     data class DataItem(val value: Any)
-
-    companion object {
-        const val ITEM_VIEW_TYPE_FORM = 0
-        const val ITEM_VIEW_TYPE_REVIEW = 1
+    companion object{
+        val DATE_FORMAT = SimpleDateFormat("yy:MM:dd hh:mm")
     }
+
+
 }
