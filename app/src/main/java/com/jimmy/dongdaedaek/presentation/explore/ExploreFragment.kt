@@ -1,7 +1,6 @@
 package com.jimmy.dongdaedaek.presentation.explore
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.chip.Chip
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentExploreBinding
 import com.jimmy.dongdaedaek.domain.model.Review
@@ -70,11 +70,31 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
     override fun initViewPager(recentReviews: List<Review>) {
         val pagerAdapter = RecentReviewAdapter(recentReviews)
         binding?.viewPagerView?.adapter = pagerAdapter.apply {
-            onClickListener ={
-                val store = presenter.getStoreById(it.storeId!!)
+            onClickListener = {
+                presenter.getStoreById(it.storeId!!)
             }
         }
         binding?.viewPagerView?.setCurrentItem(pagerAdapter.itemCount / 2, false)
+    }
+
+    override fun initCategory(categories: List<Pair<String, String>>) {
+        categories.forEach {
+            binding?.categoryChipGroup?.addView(Chip(context).apply {
+                text = it.second
+                isCheckable = true
+                tag = it.first
+                setOnCheckedChangeListener{ _, _ ->
+                    binding?.categoryChipGroup?.checkedChipIds?.let { idList ->
+                        presenter.fetchFilteredStore(
+                            idList.map {
+                                (binding?.categoryChipGroup?.findViewById(it) as Chip).text
+                            } as MutableList<String>
+                        )
+                    }
+                }
+            })
+        }
+
     }
 
     fun bindView() {

@@ -73,7 +73,7 @@ class RecentReviewAdapter(
         fun bind(item:Review){
             binding.recentStoreNameTextView.text=item.reviewText
             binding.ratingTextView.text = item.rating.toString()
-            binding.ratingBar.progress = item.rating?.toInt() ?: 0
+            binding.ratingBar.rating = item.rating!!
             onClickListener?.let {
                 binding.root.setOnClickListener{
                     data[adapterPosition%data.size].let{

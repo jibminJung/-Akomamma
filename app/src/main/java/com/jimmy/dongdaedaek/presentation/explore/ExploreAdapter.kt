@@ -60,13 +60,13 @@ class ExploreAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }?:run{
                 binding.storeImageView.toGone()
             }
+            binding.storeCategoryChipGroup.removeAllViews()
             item.category?.forEach {
                 binding.storeCategoryChipGroup.addView(Chip(binding.root.context).apply {
                     text = it
                     isClickable = false
                 })
             }
-
         }
     }
 

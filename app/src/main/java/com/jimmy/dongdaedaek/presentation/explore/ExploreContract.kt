@@ -1,6 +1,5 @@
 package com.jimmy.dongdaedaek.presentation.explore
 
-import android.net.Uri
 import com.jimmy.dongdaedaek.domain.model.Review
 import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.presentation.BasePresenter
@@ -15,11 +14,14 @@ interface ExploreContract {
         fun showErrorToast()
         fun initViewPager(recentReviews:List<Review>)
         fun goToStore(store:Store)
+        fun initCategory(categories:List<Pair<String,String>>)
+
     }
 
     interface Presenter:BasePresenter{
         fun checkLogin(uri: String)
         fun fetchRecentReview()
         fun getStoreById(storeId:String)
+        fun fetchFilteredStore(checkedChip: MutableList<String>)
     }
 }

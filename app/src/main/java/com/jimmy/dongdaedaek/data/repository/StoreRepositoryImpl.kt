@@ -21,6 +21,9 @@ class StoreRepositoryImpl(
         return storeApi.getStoreById(storeId)
     }
 
+    override suspend fun getFilteredStore(checkedCategory: MutableList<String>): List<Store> = withContext(dispatcher){
+        storeApi.getFilteredStore(checkedCategory)
+    }
 
 
 }

@@ -31,4 +31,10 @@ class StoreApiImpl(
             .await()
             .toObject<Store>()!!
 
+    override suspend fun getFilteredStore(checkedCategory: MutableList<String>): List<Store> =
+        firebaseFirestore.collection("stores")
+            .whereArrayContainsAny("category", checkedCategory)
+            .get()
+            .await()
+            .map{it.toObject<Store>()}
 }

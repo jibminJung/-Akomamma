@@ -91,24 +91,35 @@ val dataModule = module {
 val domainModule = module {
     factory { GetStoresUseCase(get()) }
     factory { GetReviewUseCase(get()) }
-    factory { UploadReviewUseCase(get(),get()) }
+    factory { UploadReviewUseCase(get(), get()) }
     factory { RequestLoginUseCase(get(), get(), get()) }
     factory { CheckLinkAndLoginUseCase(get(), get(), get()) }
     factory { GetCurrentUserEmail(get(), get()) }
     factory { LogoutUseCase(get(), get()) }
     factory { FindLocationUseCase(get()) }
-    factory { RegisterStoreUseCase(get(),get()) }
+    factory { RegisterStoreUseCase(get(), get()) }
     factory { UploadPhotosUseCase(get()) }
     factory { GetRecentReviewUseCase(get()) }
     factory { GetStoreByIdUseCase(get()) }
+    factory { GetFilteredStoreUseCase(get()) }
 }
 val presenterModule = module {
     scope<ExploreFragment> {
-        scoped<ExploreContract.Presenter> { ExplorePresenter(getSource(), get(), get(),get(),get()) }
+        scoped<ExploreContract.Presenter> {
+            ExplorePresenter(
+                getSource(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get(),
+                get()
+            )
+        }
     }
     scope<StoreInformationFragment> {
         scoped<StoreInformationContract.Presenter> { (store: Store) ->
-            StoreInformationPresenter(store, getSource(), get(), get(),get(),get())
+            StoreInformationPresenter(store, getSource(), get(), get(), get(), get())
         }
     }
     scope<MyPageFragment> {
@@ -119,7 +130,7 @@ val presenterModule = module {
     }
 
     scope<AddStoreFragment> {
-        scoped<AddStoreContract.Presenter> { AddStorePresenter(getSource(), get(),get()) }
+        scoped<AddStoreContract.Presenter> { AddStorePresenter(getSource(), get(), get()) }
     }
 
     scope<SelectLocationFragment> {

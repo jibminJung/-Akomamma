@@ -29,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:textSize="11sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/photo_recycler_view"
         tools:text="writer" />
@@ -36,6 +37,7 @@
     <TextView
         android:id="@+id/content_text_view"
         android:layout_width="wrap_content"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,9 +61,10 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="6dp"
         android:src="@drawable/ic_baseline_star_24"
-        app:layout_constraintBottom_toBottomOf="@id/content_text_view"
+        app:layout_constraintBottom_toBottomOf="@id/date_text_view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/content_text_view"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintTop_toTopOf="@id/user_id_text_view"
         app:tint="@color/orange" />
 
     <TextView
