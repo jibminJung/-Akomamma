@@ -6,8 +6,10 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.jimmy.dongdaedaek.BuildConfig
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.ActivityMainBinding
+import com.naver.maps.map.NaverMapSdk
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         initView()
         bindView()
+        NaverMapSdk.getInstance(applicationContext).client = NaverMapSdk.NaverCloudPlatformClient(BuildConfig.NAVER_API_KEY)
 
 
     }

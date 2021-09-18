@@ -46,7 +46,6 @@ val appModule = module {
     single { Firebase.firestore }
     single { Firebase.storage }
     single { Firebase.auth }
-    single { NaverMapSdk.getInstance(androidContext()) }
 
 }
 val dataModule = module {
@@ -126,7 +125,7 @@ val presenterModule = module {
         scoped<MyPageContract.Presenter> { MyPagePresenter(getSource(), get(), get(), get()) }
     }
     scope<MapPageFragment> {
-        scoped<MapPageContract.Presenter> { MapPagePresenter(getSource()) }
+        scoped<MapPageContract.Presenter> { MapPagePresenter(getSource(),get(),get(),get()) }
     }
 
     scope<AddStoreFragment> {

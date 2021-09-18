@@ -16,9 +16,6 @@ import org.koin.android.scope.ScopeFragment
 
 class SelectLocationFragment() : ScopeFragment(), SelectLocationContract.View,OnMapReadyCallback {
     override val presenter: SelectLocationContract.Presenter by inject()
-
-    val naverMapSdk: NaverMapSdk by inject()
-
     var binding: FragmentSelectLocationBinding? = null
     var naverMap:NaverMap? =null
 
@@ -61,9 +58,6 @@ class SelectLocationFragment() : ScopeFragment(), SelectLocationContract.View,On
 
     }
     fun initMap(){
-        naverMapSdk.client =
-            NaverMapSdk.NaverCloudPlatformClient(BuildConfig.NAVER_API_KEY)
-
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
             ?: MapFragment.newInstance().also {
