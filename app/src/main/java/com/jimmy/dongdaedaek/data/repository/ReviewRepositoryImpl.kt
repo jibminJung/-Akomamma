@@ -19,4 +19,7 @@ class ReviewRepositoryImpl(
         reviewApi.uploadReview(review)
     }
 
+    override suspend fun getRecentReview(): List<Review> = withContext(dispatcher){
+        reviewApi.getRecentReviews()
+    }
 }

@@ -5,4 +5,5 @@ import com.jimmy.dongdaedaek.domain.model.Store
 interface StoreRepository {
     suspend fun getStores():List<Store>
     suspend fun registerStore(store:Store)
+    suspend fun getStoreById(storeId:String):Store
 }

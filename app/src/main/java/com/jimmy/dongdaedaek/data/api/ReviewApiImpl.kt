@@ -54,4 +54,11 @@ class ReviewApiImpl(
         return newReviewRef.get().await().toObject<Review>()!!
     }
 
+    override suspend fun getRecentReviews(): List<Review> =
+        firebaseFirestore.collection("reviews")
+            .orderBy("createdAt",Query.Direction.DESCENDING)
+            .limit(10)
+            .get()
+            .await()
+            .map { it.toObject<Review>() }
 }

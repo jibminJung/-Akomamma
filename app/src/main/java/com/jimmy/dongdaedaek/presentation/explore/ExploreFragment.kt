@@ -11,14 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentExploreBinding
+import com.jimmy.dongdaedaek.domain.model.Review
 import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.extension.toGone
 import com.jimmy.dongdaedaek.extension.toVisible
 import org.koin.android.scope.ScopeFragment
-import kotlin.concurrent.fixedRateTimer
 
 
-class ExploreFragment : ScopeFragment(),ExploreContract.View{
+class ExploreFragment : ScopeFragment(), ExploreContract.View {
 
     private var binding: FragmentExploreBinding? = null
     override val presenter: ExploreContract.Presenter by inject()
@@ -65,13 +65,20 @@ class ExploreFragment : ScopeFragment(),ExploreContract.View{
             this.context,
             RecyclerView.VERTICAL, false
         )
-
-        val pagerAdapter = RecentStoreAdapter()
-        binding?.viewPagerView?.adapter = pagerAdapter
     }
 
-    fun bindView(){
-        (binding?.exploreRecyclerView?.adapter as ExploreAdapter).onClickListener={store->
+    override fun initViewPager(recentReviews: List<Review>) {
+        val pagerAdapter = RecentReviewAdapter(recentReviews)
+        binding?.viewPagerView?.adapter = pagerAdapter.apply {
+            onClickListener ={
+                val store = presenter.getStoreById(it.storeId!!)
+            }
+        }
+        binding?.viewPagerView?.setCurrentItem(pagerAdapter.itemCount / 2, false)
+    }
+
+    fun bindView() {
+        (binding?.exploreRecyclerView?.adapter as ExploreAdapter).onClickListener = { store ->
             val action = ExploreFragmentDirections.toStoreInformationAction(store)
             findNavController().navigate(action)
         }
@@ -82,17 +89,14 @@ class ExploreFragment : ScopeFragment(),ExploreContract.View{
     }
 
     override fun showStores(stores: List<Store>) {
-        (binding?.viewPagerView?.adapter as RecentStoreAdapter).run{
-            addItem(stores)
-            notifyDataSetChanged()
-            Log.d("storeId",stores.first().id?:"there is no id")
-        }
-
         (binding?.exploreRecyclerView?.adapter as ExploreAdapter).run {
             addItem(stores)
             notifyDataSetChanged()
         }
+    }
 
+    override fun goToStore(store: Store) {
+        findNavController().navigate(ExploreFragmentDirections.toStoreInformationAction(store))
     }
 
     override fun showProgressBar() {

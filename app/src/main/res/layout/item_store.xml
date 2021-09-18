@@ -36,6 +36,7 @@
                 android:layout_marginStart="15dp"
                 android:textColor="@color/black"
                 android:textSize="20sp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toTopOf="@id/store_category_chip_group"
                 app:layout_constraintEnd_toStartOf="@id/star_icon_image_view"
                 app:layout_constraintStart_toStartOf="parent"

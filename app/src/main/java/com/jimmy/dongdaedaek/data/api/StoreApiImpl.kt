@@ -23,4 +23,12 @@ class StoreApiImpl(
 
         }.await()
     }
+
+    override suspend fun getStoreById(storeId: String): Store =
+        firebaseFirestore.collection("stores")
+            .document(storeId)
+            .get()
+            .await()
+            .toObject<Store>()!!
+
 }

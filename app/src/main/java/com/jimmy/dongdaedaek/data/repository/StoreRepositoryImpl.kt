@@ -16,4 +16,11 @@ class StoreRepositoryImpl(
     override suspend fun registerStore(store: Store) = withContext(dispatcher){
         storeApi.registerStore(store)
     }
+
+    override suspend fun getStoreById(storeId: String): Store {
+        return storeApi.getStoreById(storeId)
+    }
+
+
+
 }

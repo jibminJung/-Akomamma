@@ -99,10 +99,12 @@ val domainModule = module {
     factory { FindLocationUseCase(get()) }
     factory { RegisterStoreUseCase(get(),get()) }
     factory { UploadPhotosUseCase(get()) }
+    factory { GetRecentReviewUseCase(get()) }
+    factory { GetStoreByIdUseCase(get()) }
 }
 val presenterModule = module {
     scope<ExploreFragment> {
-        scoped<ExploreContract.Presenter> { ExplorePresenter(getSource(), get(), get()) }
+        scoped<ExploreContract.Presenter> { ExplorePresenter(getSource(), get(), get(),get(),get()) }
     }
     scope<StoreInformationFragment> {
         scoped<StoreInformationContract.Presenter> { (store: Store) ->
