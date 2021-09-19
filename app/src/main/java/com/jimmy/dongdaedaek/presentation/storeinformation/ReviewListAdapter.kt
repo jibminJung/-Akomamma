@@ -11,13 +11,14 @@ import java.text.SimpleDateFormat
 class ReviewListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     val data = ArrayList<DataItem>()
-
+    var imageClickListener: ((List<String>,Int) -> Unit)? = null
     inner class ReviewItemViewHolder(val binding: ItemReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Review) {
             item.photos?.let{
                 binding.photoRecyclerView.adapter = ReviewPhotoAdapter().apply {
                     data.addAll(item.photos)
+                    clickListener = imageClickListener
                 }
             }
             binding.userIdTextView.text = "${item.userId?.take(2)}***"

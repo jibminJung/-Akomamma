@@ -2,6 +2,7 @@ package com.jimmy.dongdaedaek.presentation.storeinformation
 
 import android.app.Activity
 import android.content.pm.PackageManager
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -17,11 +18,13 @@ import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.jimmy.dongdaedaek.databinding.FragmentStoreInformationBinding
 import com.jimmy.dongdaedaek.domain.model.Review
 import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.extension.toGone
 import com.jimmy.dongdaedaek.extension.toVisible
+import com.stfalcon.imageviewer.StfalconImageViewer
 import org.koin.android.scope.ScopeFragment
 import org.koin.core.parameter.parametersOf
 
@@ -63,12 +66,25 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
 
     override fun showStoreInfo(store: Store) {
         binding?.storeNameTextView?.text = store.title
-        //binding?.storeDescriptionTextView?.text = store.category
+        var cate : String = ""
+        store.category?.forEach {
+            cate += it + ", "
+        }
+        cate.trimEnd(' ').trimEnd(',')
+        binding?.storeDescriptionTextView?.text = cate
+        binding?.ratingTextView?.text = store.rating?.take(4)
 
     }
 
     fun initView() {
-        binding?.storeInformationRecyclerView?.adapter = ReviewListAdapter()
+        binding?.storeInformationRecyclerView?.adapter = ReviewListAdapter().apply {
+            imageClickListener = {list, pos ->
+                StfalconImageViewer.Builder(context, list) { view, image ->
+                    Glide.with(requireContext()).load(image).into(view)
+                }.show().setCurrentPosition(pos)
+
+            }
+        }
         binding?.storeInformationRecyclerView?.layoutManager = LinearLayoutManager(context)
         binding?.reviewForm?.thumbRecyclerView?.adapter = ImageRecyclerAdapter().also {
             imageRecyclerAdapter = it
