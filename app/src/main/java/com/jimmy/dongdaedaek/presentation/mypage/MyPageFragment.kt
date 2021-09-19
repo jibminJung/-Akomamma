@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.jimmy.dongdaedaek.databinding.FragmentMyPageBinding
 import com.jimmy.dongdaedaek.extension.toGone
@@ -34,9 +35,9 @@ class MyPageFragment : ScopeFragment(), MyPageContract.View {
 
     private fun bindView() {
         binding?.loginOutButton?.setOnClickListener {
-            if(presenter.loggedIn){
+            if (presenter.loggedIn) {
                 presenter.logout()
-            }else{
+            } else {
                 val email = binding?.emailEditText?.text.toString()
                 presenter.requestLogin(email)
                 binding?.emailEditText?.text?.clear()
@@ -45,6 +46,10 @@ class MyPageFragment : ScopeFragment(), MyPageContract.View {
 
         binding?.emailEditText?.addTextChangedListener { editable ->
             binding?.loginOutButton?.isEnabled = editable?.length ?: 0 > 0
+        }
+
+        binding?.wishStoreListButton?.setOnClickListener {
+            findNavController().navigate(MyPageFragmentDirections.toWishList())
         }
 
     }
@@ -57,9 +62,11 @@ class MyPageFragment : ScopeFragment(), MyPageContract.View {
 
     override fun showLoginPage() {
         binding?.emailEditText?.editableText?.clear()
-        binding?.loginOutButton?.isEnabled=true
+        binding?.emailEditText?.isEnabled = true
+        binding?.loginOutButton?.isEnabled = true
         binding?.loginOutButton?.text = "로그인"
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -70,6 +77,7 @@ class MyPageFragment : ScopeFragment(), MyPageContract.View {
         super.onDestroy()
         presenter.onDestroy()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.onDestroyView()

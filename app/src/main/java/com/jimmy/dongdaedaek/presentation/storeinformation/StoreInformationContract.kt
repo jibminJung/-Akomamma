@@ -16,9 +16,14 @@ interface StoreInformationContract {
         fun addReviewData(reviews:List<Review>)
         fun refreshReviewData(reviews:List<Review>)
         fun clearImageInput()
+        fun buttonSelected()
+        fun buttonReleased()
     }
     interface Presenter:BasePresenter{
         fun requestSubmitReview(context: String, rating: Float, data: MutableList<Uri>?)
+        fun registerWishStore()
+        fun deleteWishStore()
+        fun checkUserWishStore()
         val store: Store
     }
 }

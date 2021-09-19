@@ -21,7 +21,6 @@
         android:layout_marginTop="14dp"
         android:gravity="center"
         android:textSize="20sp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/store_image_view"
         tools:text="Hello" />
@@ -70,11 +69,11 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@color/white"
-        android:drawableStart="@drawable/ic_heart_icon"
-        android:drawableTint="@color/gray"
-        android:paddingLeft="40dp"
-        android:paddingRight="30dp"
+        android:drawableStart="@drawable/ic_heart_selector"
+        android:gravity="center"
+        android:paddingStart="20dp"
         android:text="관심 목록에 추가"
+        android:maxLines="1"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@id/find_map_button"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,9 +4,7 @@ import android.net.Uri
 import com.google.firebase.auth.FirebaseAuth
 import com.jimmy.dongdaedaek.NullUserException
 import com.jimmy.dongdaedaek.domain.model.Store
-import com.jimmy.dongdaedaek.domain.usecase.GetReviewUseCase
-import com.jimmy.dongdaedaek.domain.usecase.UploadPhotosUseCase
-import com.jimmy.dongdaedaek.domain.usecase.UploadReviewUseCase
+import com.jimmy.dongdaedaek.domain.usecase.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -17,7 +15,10 @@ class StoreInformationPresenter(
     val firebaseAuth: FirebaseAuth,
     val getReviewUseCase: GetReviewUseCase,
     val uploadReviewUseCase: UploadReviewUseCase,
-    val uploadPhotosUseCase: UploadPhotosUseCase
+    val uploadPhotosUseCase: UploadPhotosUseCase,
+    val registerWishStore : RegisterWishStoreUseCase,
+    val deleteWishStore:DeleteWishStoreUseCase,
+    val checkUserWishStoreUseCase:CheckUserWishStoreUseCase
     ):StoreInformationContract.Presenter {
 
     override val scope: CoroutineScope = MainScope()
@@ -74,4 +75,56 @@ class StoreInformationPresenter(
         }
     }
 
+    override fun registerWishStore() {
+        scope.launch {
+            try {
+                view.showProgressBar()
+                registerWishStore(store)
+                view.showToastMsg("관심 목록에 추가되었습니다.")
+                view.buttonSelected()
+            }catch(e:NullUserException){
+                view.showToastMsg("로그인 되어 있지 않거나, 에러가 발생하였습니다.")
+            }catch(e:Exception){
+                view.showErrorToast()
+            }finally {
+                view.hideProgressBar()
+            }
+        }
+    }
+
+    override fun deleteWishStore() {
+        scope.launch {
+            try {
+                view.showProgressBar()
+                deleteWishStore(store)
+                view.buttonReleased()
+            }catch(e:NullUserException){
+                view.showToastMsg("로그인 되어 있지 않거나, 에러가 발생하였습니다.")
+            }catch(e:Exception){
+                view.showErrorToast()
+            }finally {
+                view.hideProgressBar()
+            }
+        }
+    }
+
+    override fun checkUserWishStore() {
+        scope.launch {
+            try {
+                view.showProgressBar()
+                val wished = checkUserWishStoreUseCase(store)
+                if(wished){
+                    view.buttonSelected()
+                }else{
+                    view.buttonReleased()
+                }
+            }catch(e:NullUserException){
+                view.showToastMsg("로그인 되어 있지 않거나, 에러가 발생하였습니다.")
+            }catch(e:Exception){
+                view.showErrorToast()
+            }finally {
+                view.hideProgressBar()
+            }
+        }
+    }
 }

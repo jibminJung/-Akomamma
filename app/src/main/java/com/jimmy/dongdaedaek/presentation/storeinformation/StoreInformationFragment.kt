@@ -4,10 +4,12 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -71,11 +73,22 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
         binding?.reviewForm?.thumbRecyclerView?.adapter = ImageRecyclerAdapter().also {
             imageRecyclerAdapter = it
         }
+        presenter.checkUserWishStore()
 
 
     }
 
     fun bindView() {
+
+        binding?.wishButton?.setOnClickListener {
+            if((it as Button).isSelected){
+                Log.d("wish", "button is pressed. delete fun call")
+                presenter.deleteWishStore()
+            }else{
+                Log.d("wish", "button is not pressed. register fun call")
+                presenter.registerWishStore()
+            }
+        }
 
         binding?.findMapButton?.setOnClickListener {
             val action = StoreInformationFragmentDirections.toStoreLocation(arguments.store)
@@ -152,6 +165,14 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
             addReviewData(reviews)
             notifyDataSetChanged()
         }
+    }
+
+    override fun buttonSelected() {
+        binding?.wishButton?.isSelected = true
+    }
+
+    override fun buttonReleased() {
+        binding?.wishButton?.isSelected = false
     }
 
     override fun showProgressBar() {

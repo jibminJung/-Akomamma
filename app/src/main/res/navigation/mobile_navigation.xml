@@ -55,6 +55,11 @@
         android:name="com.jimmy.dongdaedaek.presentation.mypage.MyPageFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_my_page">
+
+        <action
+            android:id="@+id/to_wish_list"
+            app:destination="@id/navigation_wish_store_list"
+            />
     </fragment>
 
     <fragment
@@ -100,6 +105,23 @@
         android:label="위치 선택하기"
         >
 
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_wish_store_list"
+        android:name="com.jimmy.dongdaedaek.presentation.wishstorelist.WishStoreListFragment"
+        tools:layout="@layout/fragment_wish_store_list"
+        android:label="관심 목록"
+        >
+
+        <action
+            android:id="@+id/to_store_information_action"
+            app:destination="@id/navigation_store_information"
+            app:enterAnim="@anim/enter_sliding">
+            <argument
+                android:name="store"
+                app:argType="com.jimmy.dongdaedaek.domain.model.Store"/>
+        </action>
     </fragment>
 
 </navigation>

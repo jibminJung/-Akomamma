@@ -30,6 +30,9 @@ import com.jimmy.dongdaedaek.presentation.selectLocation.SelectLocationPresenter
 import com.jimmy.dongdaedaek.presentation.storeinformation.StoreInformationContract
 import com.jimmy.dongdaedaek.presentation.storeinformation.StoreInformationFragment
 import com.jimmy.dongdaedaek.presentation.storeinformation.StoreInformationPresenter
+import com.jimmy.dongdaedaek.presentation.wishstorelist.WishStoreListContract
+import com.jimmy.dongdaedaek.presentation.wishstorelist.WishStoreListFragment
+import com.jimmy.dongdaedaek.presentation.wishstorelist.WishStoreListPresenter
 import com.naver.maps.map.NaverMapSdk
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
@@ -61,6 +64,7 @@ val dataModule = module {
     single { TmapRepository(get(), get()) }
     single { CategoryRepository(get(), get()) }
     single { ImageRepository(get(), get()) }
+    single {WishStoreRepository(get(),get())}
 
     // Api
     single {
@@ -101,6 +105,10 @@ val domainModule = module {
     factory { GetRecentReviewUseCase(get()) }
     factory { GetStoreByIdUseCase(get()) }
     factory { GetFilteredStoreUseCase(get()) }
+    factory { RegisterWishStoreUseCase(get(),get()) }
+    factory { DeleteWishStoreUseCase(get(),get()) }
+    factory { CheckUserWishStoreUseCase(get(),get()) }
+    factory { LoadWishStoreListUseCase(get(),get()) }
 }
 val presenterModule = module {
     scope<ExploreFragment> {
@@ -118,7 +126,7 @@ val presenterModule = module {
     }
     scope<StoreInformationFragment> {
         scoped<StoreInformationContract.Presenter> { (store: Store) ->
-            StoreInformationPresenter(store, getSource(), get(), get(), get(), get())
+            StoreInformationPresenter(store, getSource(), get(), get(), get(), get(),get(),get(),get())
         }
     }
     scope<MyPageFragment> {
@@ -135,5 +143,7 @@ val presenterModule = module {
     scope<SelectLocationFragment> {
         scoped<SelectLocationContract.Presenter> { SelectLocationPresenter(getSource(), get()) }
     }
-
+    scope<WishStoreListFragment> {
+        scoped<WishStoreListContract.Presenter> { WishStoreListPresenter(getSource(), get(),get()) }
+    }
 }
