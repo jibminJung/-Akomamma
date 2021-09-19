@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class CheckLinkAndLoginUseCase(
     val firebaseAuth: FirebaseAuth,
-    val userRepository: UserRepository,
+    private val userRepository: UserRepository,
     val dispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(emailLink:String)=
@@ -23,15 +23,11 @@ class CheckLinkAndLoginUseCase(
                         if (task.isSuccessful) {
                             Log.d("logging in...", "Successfully signed in with email link!")
                             val result = task.result
-                            // You can access the new user via result.getUser()
-                            // Additional user info profile *not* available via:
-                            // result.getAdditionalUserInfo().getProfile() == null
-                            // You can check if the user is new or existing:
-                            // result.getAdditionalUserInfo().isNewUser()
                         } else {
                             Log.d("logging in...", "Error signing in with email link", task.exception)
                         }
                     }
+
             }
 
         }

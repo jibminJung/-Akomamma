@@ -33,7 +33,6 @@ import com.jimmy.dongdaedaek.presentation.storeinformation.StoreInformationPrese
 import com.jimmy.dongdaedaek.presentation.wishstorelist.WishStoreListContract
 import com.jimmy.dongdaedaek.presentation.wishstorelist.WishStoreListFragment
 import com.jimmy.dongdaedaek.presentation.wishstorelist.WishStoreListPresenter
-import com.naver.maps.map.NaverMapSdk
 import kotlinx.coroutines.Dispatchers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

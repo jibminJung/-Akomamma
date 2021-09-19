@@ -1,13 +1,13 @@
 package com.jimmy.dongdaedaek.data.api
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.toObject
 import com.jimmy.dongdaedaek.domain.model.Review
 import com.jimmy.dongdaedaek.domain.model.Store
 import kotlinx.coroutines.tasks.await
-import android.util.Log
-import com.google.firebase.firestore.Query
 
 class ReviewApiImpl(
     private val firebaseFirestore: FirebaseFirestore

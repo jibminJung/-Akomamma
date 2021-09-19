@@ -29,7 +29,7 @@ class WishStoreListFragment : ScopeFragment(), WishStoreListContract.View {
         presenter.onViewCreated()
     }
 
-    fun initView() {
+    private fun initView() {
         binding?.wishStoreRecyclerView?.adapter = WishStoreListAdapter().apply {
             clickListener = {
                 presenter.getStore(it.id!!)

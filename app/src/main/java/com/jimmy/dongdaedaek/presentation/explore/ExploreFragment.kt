@@ -9,7 +9,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentExploreBinding
 import com.jimmy.dongdaedaek.domain.model.Review
@@ -97,7 +96,7 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
         }
     }
 
-    fun bindView() {
+    private fun bindView() {
         (binding?.exploreRecyclerView?.adapter as ExploreAdapter).onClickListener = { store ->
             val action = ExploreFragmentDirections.toStoreInformationAction(store)
             findNavController().navigate(action)

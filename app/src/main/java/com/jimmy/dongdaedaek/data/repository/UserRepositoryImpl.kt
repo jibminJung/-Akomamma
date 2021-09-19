@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class UserRepositoryImpl(
-    val preferenceManager: PreferenceManager,
+    private val preferenceManager: PreferenceManager,
     val dispatcher: CoroutineDispatcher
 ):UserRepository {
     override suspend fun getUser(): User? = withContext(dispatcher) {
@@ -14,7 +14,7 @@ class UserRepositoryImpl(
     }
 
     override suspend fun saveUser(user: User) = withContext(dispatcher) {
-        preferenceManager.putString(KEY_USER_ID, user.id!!)
+        preferenceManager.putString(KEY_USER_ID, user.id)
     }
 
     companion object {

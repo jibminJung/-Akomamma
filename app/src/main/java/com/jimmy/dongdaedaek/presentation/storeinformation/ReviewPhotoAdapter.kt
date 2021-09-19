@@ -1,6 +1,5 @@
 package com.jimmy.dongdaedaek.presentation.storeinformation
 
-import android.media.Image
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.jimmy.dongdaedaek.databinding.ItemReviewImageBinding
-import com.stfalcon.imageviewer.StfalconImageViewer
 
 class ReviewPhotoAdapter : RecyclerView.Adapter<ReviewPhotoAdapter.ReviewPhotoViewHolder>() {
     val data: MutableList<String> = mutableListOf()

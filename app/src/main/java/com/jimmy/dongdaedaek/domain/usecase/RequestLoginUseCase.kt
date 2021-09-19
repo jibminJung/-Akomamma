@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 
 class RequestLoginUseCase(
     val firebaseAuth: FirebaseAuth,
-    val userRepository: UserRepository,
+    private val userRepository: UserRepository,
     val dispatcher: CoroutineDispatcher
 ) {
     suspend operator fun invoke(email: String)=

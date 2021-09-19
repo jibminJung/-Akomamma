@@ -1,13 +1,12 @@
 package com.jimmy.dongdaedaek.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class CategoryRepository(
-    val firestore: FirebaseFirestore,
+    private val firestore: FirebaseFirestore,
     val dispatcher: CoroutineDispatcher
 ) {
 

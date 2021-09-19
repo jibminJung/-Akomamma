@@ -7,12 +7,12 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 class ImageRepository(
-    val firebaseStorage: FirebaseStorage,
+    private val firebaseStorage: FirebaseStorage,
     val dispatcher: CoroutineDispatcher
 ) {
 
     suspend fun uploadPhotos(photos:MutableList<Uri>) = withContext(dispatcher){
-        val uploaded:List<String> = photos.mapIndexed { index, uri ->
+        val uploaded:List<String> = photos.mapIndexed { _, uri ->
             try{
                 val fileName = (uri.toString() + "${System.currentTimeMillis()}").hashCode().toString()
                 firebaseStorage.reference.child("photos/").child(fileName)

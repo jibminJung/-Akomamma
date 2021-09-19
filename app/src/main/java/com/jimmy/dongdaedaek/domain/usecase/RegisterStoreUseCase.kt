@@ -9,7 +9,7 @@ import com.naver.maps.geometry.LatLng
 
 class RegisterStoreUseCase(
     val firebaseAuth: FirebaseAuth,
-    val storeRepository: StoreRepository
+    private val storeRepository: StoreRepository
 ) {
 
     suspend operator fun invoke(

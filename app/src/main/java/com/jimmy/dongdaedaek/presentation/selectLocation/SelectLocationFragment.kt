@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.jimmy.dongdaedaek.BuildConfig
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentSelectLocationBinding
 import com.jimmy.dongdaedaek.extension.setNavigationResult
@@ -17,7 +16,7 @@ import org.koin.android.scope.ScopeFragment
 class SelectLocationFragment() : ScopeFragment(), SelectLocationContract.View,OnMapReadyCallback {
     override val presenter: SelectLocationContract.Presenter by inject()
     var binding: FragmentSelectLocationBinding? = null
-    var naverMap:NaverMap? =null
+    private var naverMap:NaverMap? =null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +47,7 @@ class SelectLocationFragment() : ScopeFragment(), SelectLocationContract.View,On
         presenter.onDestroy()
     }
 
-    fun bindView(){
+    private fun bindView(){
         binding?.confirmAddressButton?.setOnClickListener {
 
             setNavigationResult(binding?.confirmAddressButton?.text.toString().trimStart('.'),"address")
@@ -57,7 +56,7 @@ class SelectLocationFragment() : ScopeFragment(), SelectLocationContract.View,On
         }
 
     }
-    fun initMap(){
+    private fun initMap(){
         val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.map_fragment) as MapFragment?
             ?: MapFragment.newInstance().also {

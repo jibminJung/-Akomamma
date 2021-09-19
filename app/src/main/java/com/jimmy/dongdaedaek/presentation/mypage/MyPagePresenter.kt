@@ -1,15 +1,12 @@
 package com.jimmy.dongdaedaek.presentation.mypage
 
-import android.app.PendingIntent.getActivity
 import android.util.Log
-import com.google.common.escape.Escaper
 import com.jimmy.dongdaedaek.domain.usecase.GetCurrentUserEmail
 import com.jimmy.dongdaedaek.domain.usecase.LogoutUseCase
 import com.jimmy.dongdaedaek.domain.usecase.RequestLoginUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class MyPagePresenter(
     val view: MyPageContract.View,

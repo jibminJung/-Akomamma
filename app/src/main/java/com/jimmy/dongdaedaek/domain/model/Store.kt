@@ -2,7 +2,6 @@ package com.jimmy.dongdaedaek.domain.model
 
 import android.os.Parcelable
 import com.google.firebase.firestore.DocumentId
-import com.naver.maps.geometry.LatLng
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

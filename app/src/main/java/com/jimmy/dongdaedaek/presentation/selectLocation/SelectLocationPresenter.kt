@@ -3,8 +3,6 @@ package com.jimmy.dongdaedaek.presentation.selectLocation
 import android.util.Log
 import com.jimmy.dongdaedaek.domain.usecase.FindLocationUseCase
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.geometry.Tm128
-import com.naver.maps.geometry.WebMercatorCoord
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch

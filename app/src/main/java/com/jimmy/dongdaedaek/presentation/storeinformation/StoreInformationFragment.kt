@@ -2,7 +2,6 @@ package com.jimmy.dongdaedaek.presentation.storeinformation
 
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -30,10 +29,10 @@ import org.koin.core.parameter.parametersOf
 
 class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View {
     override val presenter: StoreInformationContract.Presenter by inject { parametersOf(arguments.store) }
-    val arguments: StoreInformationFragmentArgs by navArgs()
+    private val arguments: StoreInformationFragmentArgs by navArgs()
     private var binding: FragmentStoreInformationBinding? = null
-    var imageRecyclerAdapter:ImageRecyclerAdapter? = null
-    val getContent =
+    private var imageRecyclerAdapter:ImageRecyclerAdapter? = null
+    private val getContent =
         registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { list: List<Uri> ->
             // Callback function.. Handle the returned Uri
             if (list.isNotEmpty()) {
@@ -66,7 +65,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
 
     override fun showStoreInfo(store: Store) {
         binding?.storeNameTextView?.text = store.title
-        var cate : String = ""
+        var cate = ""
         store.category?.forEach {
             cate += it + ", "
         }
@@ -76,7 +75,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
 
     }
 
-    fun initView() {
+    private fun initView() {
         binding?.storeInformationRecyclerView?.adapter = ReviewListAdapter().apply {
             imageClickListener = {list, pos ->
                 StfalconImageViewer.Builder(context, list) { view, image ->
@@ -94,7 +93,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
 
     }
 
-    fun bindView() {
+    private fun bindView() {
 
         binding?.wishButton?.setOnClickListener {
             if((it as Button).isSelected){

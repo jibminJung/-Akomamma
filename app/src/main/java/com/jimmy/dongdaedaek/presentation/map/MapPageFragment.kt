@@ -1,6 +1,5 @@
 package com.jimmy.dongdaedaek.presentation.map
 
-import android.icu.text.IDNA
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +11,6 @@ import androidx.annotation.UiThread
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
-import com.jimmy.dongdaedaek.BuildConfig
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentMapPageBinding
 import com.jimmy.dongdaedaek.domain.model.Store
@@ -28,11 +25,11 @@ import org.koin.android.scope.ScopeFragment
 
 class MapPageFragment : ScopeFragment(), MapPageContract.View, OnMapReadyCallback {
     override val presenter: MapPageContract.Presenter by inject()
-    var binding: FragmentMapPageBinding? = null
-    val argument: MapPageFragmentArgs by navArgs()
-    var naverMap: NaverMap? = null
-    val markerList: MutableList<Marker> = mutableListOf()
-    val infoWindow: InfoWindow by lazy {
+    private var binding: FragmentMapPageBinding? = null
+    private val argument: MapPageFragmentArgs by navArgs()
+    private var naverMap: NaverMap? = null
+    private val markerList: MutableList<Marker> = mutableListOf()
+    private val infoWindow: InfoWindow by lazy {
         initInfoWindow()
     }
 
@@ -107,7 +104,7 @@ class MapPageFragment : ScopeFragment(), MapPageContract.View, OnMapReadyCallbac
         }
     }
 
-    val onCheckedListener = CompoundButton.OnCheckedChangeListener { _, _ ->
+    private val onCheckedListener = CompoundButton.OnCheckedChangeListener { _, _ ->
         binding?.categoryChipGroup?.checkedChipIds?.let { idList ->
             presenter.fetchFilteredStore(
                 idList.map {
@@ -155,7 +152,7 @@ class MapPageFragment : ScopeFragment(), MapPageContract.View, OnMapReadyCallbac
         }
     }
 
-    fun initInfoWindow(): InfoWindow =
+    private fun initInfoWindow(): InfoWindow =
         InfoWindow().apply {
             adapter = object : InfoWindow.DefaultTextAdapter(requireContext()) {
                 override fun getText(infoWindow: InfoWindow): CharSequence {

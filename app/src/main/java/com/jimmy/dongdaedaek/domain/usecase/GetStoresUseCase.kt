@@ -1,6 +1,5 @@
 package com.jimmy.dongdaedaek.domain.usecase
 
-import com.jimmy.dongdaedaek.data.api.StoreApi
 import com.jimmy.dongdaedaek.data.repository.StoreRepository
 import com.jimmy.dongdaedaek.domain.model.Store
 

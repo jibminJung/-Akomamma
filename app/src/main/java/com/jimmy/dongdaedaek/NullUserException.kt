@@ -1,5 +1,3 @@
 package com.jimmy.dongdaedaek
 
-class NullUserException:Exception() {
-
-}
+class NullUserException:Exception()

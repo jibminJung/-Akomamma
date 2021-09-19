@@ -6,7 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class StoreRepositoryImpl(
-    val storeApi:StoreApi,
+    private val storeApi:StoreApi,
     val dispatcher: CoroutineDispatcher
 ):StoreRepository {
     override suspend fun getStores(): List<Store> = withContext(dispatcher){

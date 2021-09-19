@@ -1,9 +1,7 @@
 package com.jimmy.dongdaedaek.presentation.explore
 
-import android.net.Uri
 import android.util.Log
 import com.jimmy.dongdaedaek.data.repository.CategoryRepository
-import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.domain.usecase.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope

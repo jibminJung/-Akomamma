@@ -1,6 +1,5 @@
 package com.jimmy.dongdaedaek.presentation.addStore
 
-import android.widget.Toast
 import com.jimmy.dongdaedaek.NullUserException
 import com.jimmy.dongdaedaek.data.repository.CategoryRepository
 import com.jimmy.dongdaedaek.domain.usecase.RegisterStoreUseCase
@@ -11,7 +10,7 @@ import kotlinx.coroutines.launch
 
 class AddStorePresenter(
     val view: AddStoreContract.View,
-    val categoryRepository: CategoryRepository,
+    private val categoryRepository: CategoryRepository,
     val registerStoreUseCase: RegisterStoreUseCase
 ) : AddStoreContract.Presenter {
     override val scope: CoroutineScope = MainScope()
@@ -24,7 +23,7 @@ class AddStorePresenter(
 
     }
 
-    fun loadCategories() {
+    private fun loadCategories() {
         scope.launch {
             try {
                 val cats = categoryRepository.loadCategories()

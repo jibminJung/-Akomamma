@@ -5,7 +5,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class TmapRepository(
-    val tmapApi: TmapApi,
+    private val tmapApi: TmapApi,
     val dispatcher: CoroutineDispatcher
 ) {
 
