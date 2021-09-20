@@ -95,6 +95,16 @@
             android:id="@+id/to_select_location"
             app:destination="@id/navigation_select_location"
             />
+        <action
+            android:id="@+id/to_store_information_action_inclusive"
+            app:destination="@id/navigation_store_information"
+            app:popUpTo="@id/navigation_add_store"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/enter_sliding">
+            <argument
+                android:name="store"
+                app:argType="com.jimmy.dongdaedaek.domain.model.Store"/>
+        </action>
 
     </fragment>
 

@@ -14,14 +14,14 @@ class StoreApiImpl(
             .await()
             .map { it.toObject<Store>() }
 
-    override suspend fun registerStore(store: Store) {
+    override suspend fun registerStore(store: Store) :Store{
         val newStoreRef = firebaseFirestore.collection("stores").document()
         firebaseFirestore.runTransaction {transaction->
-
             transaction.set(newStoreRef,store)
-
-
         }.await()
+
+        return newStoreRef.get().await().toObject<Store>()!!
+
     }
 
     override suspend fun getStoreById(storeId: String): Store =

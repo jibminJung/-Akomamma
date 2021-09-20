@@ -26,7 +26,7 @@ class WishStoreListPresenter(
                 val data = loadWishStoreList()
                 view.addDataToRecycler(data)
             } catch (e: NullUserException) {
-                view.showToastMsg("로그인 되어있지 않거나, 에러가 발생했습니다.")
+                view.showToastMsg("로그인 후 이용 가능합니다.")
             } catch (e: Exception) {
                 view.showToastMsg("예기치 못한 에러가 발생했습니다.")
             }

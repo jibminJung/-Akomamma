@@ -9,7 +9,7 @@ data class CustomLatLng(
     val lat : Double?,
     val lng : Double?
 ):Parcelable {
-
+    constructor() : this(null,null)
 
     fun toNaverLatlng():LatLng? = if(this.lat !=null && this.lng != null){
         LatLng(this.lat,this.lng)

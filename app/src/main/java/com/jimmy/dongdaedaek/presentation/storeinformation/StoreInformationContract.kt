@@ -13,7 +13,6 @@ interface StoreInformationContract {
         fun showToastMsg(msg:String)
         fun showErrorToast()
         fun showStoreInfo(store: Store)
-        fun addReviewData(reviews:List<Review>)
         fun refreshReviewData(reviews:List<Review>)
         fun clearImageInput()
         fun buttonSelected()

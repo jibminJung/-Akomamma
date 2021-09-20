@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentAddStoreBinding
+import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.extension.getNavigationResult
 import com.jimmy.dongdaedaek.extension.toGone
 import com.jimmy.dongdaedaek.extension.toVisible
@@ -120,7 +121,7 @@ class AddStoreFragment : ScopeFragment(), AddStoreContract.View {
         binding?.progressView?.toGone()
     }
 
-    override fun navigateUp() {
-        findNavController().navigateUp()
+    override fun navigateToStore(store: Store) {
+        findNavController().navigate(AddStoreFragmentDirections.toStoreInformationActionInclusive(store))
     }
 }

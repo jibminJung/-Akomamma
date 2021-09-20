@@ -8,7 +8,7 @@ import com.jimmy.dongdaedaek.domain.model.Store
 class RegisterWishStoreUseCase(val firebaseAuth: FirebaseAuth, private val wishStoreRepository: WishStoreRepository) {
     suspend operator fun invoke(store : Store){
         if(firebaseAuth.currentUser != null){
-            val email = firebaseAuth.currentUser!!.email!!
+            val email = firebaseAuth.currentUser!!.uid!!
             wishStoreRepository.registerWishStore(email, store)
         }else{
             throw NullUserException()

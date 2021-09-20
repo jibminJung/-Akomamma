@@ -15,6 +15,8 @@ interface ExploreContract {
         fun initViewPager(recentReviews:List<Review>)
         fun goToStore(store:Store)
         fun initCategory(categories:List<Pair<String,String>>)
+        fun goToAddStorePage()
+        fun showToastMsg(msg:String)
 
     }
 
@@ -23,5 +25,6 @@ interface ExploreContract {
         fun fetchRecentReview()
         fun getStoreById(storeId:String)
         fun fetchFilteredStore(checkedChip: MutableList<String>)
+        fun goToAddStorePage()
     }
 }

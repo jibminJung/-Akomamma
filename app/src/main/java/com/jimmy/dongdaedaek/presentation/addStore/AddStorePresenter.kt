@@ -45,8 +45,8 @@ class AddStorePresenter(
         scope.launch {
             try {
                 view.showProgressBar()
-                registerStoreUseCase(name, address, categoryIds, latlng)
-                view.navigateUp()
+                val registeredStore = registerStoreUseCase(name, address, categoryIds, latlng)
+                view.navigateToStore(registeredStore)
             } catch (e: NullUserException) {
                 view.makeToast("로그인 후 등록 가능합니다.")
             } catch (e: Exception) {

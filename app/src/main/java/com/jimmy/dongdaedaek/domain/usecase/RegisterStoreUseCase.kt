@@ -17,7 +17,7 @@ class RegisterStoreUseCase(
         address: String,
         category: List<String>,
         latlng: LatLng
-    ) {
+    ) :Store{
 
         if (firebaseAuth.currentUser == null) {
             throw NullUserException()
@@ -31,7 +31,7 @@ class RegisterStoreUseCase(
             numberOfReview = 0,
             rating = "0"
         )
-        storeRepository.registerStore(store)
+        return storeRepository.registerStore(store)
 
 
     }

@@ -7,7 +7,6 @@
     tools:context=".presentation.storeinformation.StoreInformationFragment">
 
 
-
     <TextView
         android:id="@+id/store_name_text_view"
         android:layout_width="0dp"
@@ -66,9 +65,9 @@
         android:background="@color/white"
         android:drawableStart="@drawable/ic_heart_selector"
         android:gravity="center"
+        android:maxLines="1"
         android:paddingStart="20dp"
         android:text="관심 목록에 추가"
-        android:maxLines="1"
         android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@id/find_map_button"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,22 +91,50 @@
         app:layout_constraintTop_toTopOf="@id/wish_button" />
 
     <androidx.recyclerview.widget.RecyclerView
-
         android:id="@+id/store_information_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/wish_button" />
+        app:layout_constraintBottom_toTopOf="@id/review_form_frame"
+        app:layout_constraintTop_toBottomOf="@id/wish_button"
+        tools:listitem="@layout/item_review" />
+
+    <LinearLayout
+        android:id="@+id/no_review_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/review_form_frame"
+        app:layout_constraintTop_toBottomOf="@id/wish_button">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:tint="@color/black"
+            android:layout_marginBottom="14dp"
+            android:src="@drawable/ic_round_content_paste_off_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="리뷰가 없습니다ㅜㅜ"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            />
+
+    </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/review_form_frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        >
+        app:layout_constraintBottom_toBottomOf="parent">
+
         <include
             android:id="@+id/review_form"
-            layout="@layout/item_review_form"
-            />
+            layout="@layout/item_review_form" />
     </FrameLayout>
 
 
@@ -117,9 +144,9 @@
         android:layout_height="match_parent"
         android:alpha="0.5"
         android:background="@color/gray"
-        android:orientation="vertical"
         android:clickable="true"
         android:gravity="center"
+        android:orientation="vertical"
         android:visibility="gone">
 
         <ProgressBar

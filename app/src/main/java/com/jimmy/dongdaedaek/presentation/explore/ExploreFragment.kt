@@ -67,6 +67,8 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
         )
     }
 
+
+
     override fun initViewPager(recentReviews: List<Review>) {
         val pagerAdapter = RecentReviewAdapter(recentReviews)
         binding?.viewPagerView?.adapter = pagerAdapter.apply {
@@ -103,7 +105,7 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
         }
 
         binding?.addStoreFab?.setOnClickListener {
-            findNavController().navigate(R.id.to_add_store_action)
+            presenter.goToAddStorePage()
         }
     }
 
@@ -117,6 +119,9 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
     override fun goToStore(store: Store) {
         findNavController().navigate(ExploreFragmentDirections.toStoreInformationAction(store))
     }
+    override fun goToAddStorePage(){
+        findNavController().navigate(R.id.to_add_store_action)
+    }
 
     override fun showProgressBar() {
         binding?.progressView?.toVisible()
@@ -128,6 +133,10 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
 
     override fun showLoginSuccessToast() {
         Toast.makeText(context, "로그인되었습니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showToastMsg(msg: String) {
+        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show()
     }
 
     override fun showErrorToast() {

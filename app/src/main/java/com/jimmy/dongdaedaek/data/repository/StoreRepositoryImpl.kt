@@ -13,7 +13,7 @@ class StoreRepositoryImpl(
         storeApi.getStores()
     }
 
-    override suspend fun registerStore(store: Store) = withContext(dispatcher){
+    override suspend fun registerStore(store: Store) :Store = withContext(dispatcher){
         storeApi.registerStore(store)
     }
 

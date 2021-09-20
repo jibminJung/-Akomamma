@@ -175,12 +175,7 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
     }
 
 
-    override fun addReviewData(reviews: List<Review>) {
-        (binding?.storeInformationRecyclerView?.adapter as ReviewListAdapter).apply {
-            addReviewData(reviews)
-            notifyDataSetChanged()
-        }
-    }
+
 
     override fun buttonSelected() {
         binding?.wishButton?.isSelected = true
@@ -212,11 +207,17 @@ class StoreInformationFragment : ScopeFragment(), StoreInformationContract.View 
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 
+
     override fun refreshReviewData(reviews: List<Review>) {
         (binding?.storeInformationRecyclerView?.adapter as ReviewListAdapter).apply {
             clearReviewData()
             addReviewData(reviews)
             notifyDataSetChanged()
+        }
+        if(reviews.isEmpty()){
+            binding?.noReviewView?.toVisible()
+        }else{
+            binding?.noReviewView?.toGone()
         }
     }
 

@@ -1,5 +1,6 @@
 package com.jimmy.dongdaedaek.presentation.addStore
 
+import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.presentation.BasePresenter
 import com.jimmy.dongdaedaek.presentation.BaseView
 import com.naver.maps.geometry.LatLng
@@ -10,7 +11,7 @@ interface AddStoreContract {
         fun showProgressBar()
         fun hideProgressBar()
         fun makeToast(msg:String)
-        fun navigateUp()
+        fun navigateToStore(store: Store)
     }
 
     interface Presenter:BasePresenter{

@@ -8,7 +8,7 @@ import com.jimmy.dongdaedaek.domain.model.Store
 class LoadWishStoreListUseCase(val firebaseAuth: FirebaseAuth, private val wishStoreRepository: WishStoreRepository) {
     suspend operator fun invoke():List<Store>{
         if (firebaseAuth.currentUser != null){
-            val email = firebaseAuth.currentUser!!.email!!
+            val email = firebaseAuth.currentUser!!.uid!!
             return wishStoreRepository.loadWishStoreList(email)
         }else{
             throw NullUserException()

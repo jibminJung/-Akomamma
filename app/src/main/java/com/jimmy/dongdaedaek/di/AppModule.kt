@@ -119,6 +119,7 @@ val presenterModule = module {
                 get(),
                 get(),
                 get(),
+                get(),
                 get()
             )
         }

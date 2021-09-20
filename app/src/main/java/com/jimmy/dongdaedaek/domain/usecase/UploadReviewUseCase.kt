@@ -8,7 +8,7 @@ import com.jimmy.dongdaedaek.domain.model.Review
 class UploadReviewUseCase(private val reviewRepository: ReviewRepository,
 private val firebaseAuth: FirebaseAuth) {
     suspend operator fun invoke(storeId:String,content:String,rating:Float,downloadUrls:List<String>?):Review {
-        val username = firebaseAuth.currentUser?.email?:throw NullUserException()
+        val username = firebaseAuth.currentUser?.uid?:throw NullUserException()
         val review = Review(
             storeId=storeId,
             reviewText = content,

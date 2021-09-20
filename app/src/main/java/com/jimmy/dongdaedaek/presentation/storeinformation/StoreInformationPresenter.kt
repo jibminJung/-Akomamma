@@ -25,22 +25,13 @@ class StoreInformationPresenter(
 
     override fun onViewCreated() {
         view.showStoreInfo(store)
-        loadReviewData(store)
+        refreshReviewData(store)
     }
 
     override fun onDestroyView() {
     }
 
-    fun loadReviewData(store:Store)=scope.launch {
-        try{
-            view.showProgressBar()
-            view.addReviewData(getReviewUseCase(store.id!!))
-        }catch (e:Exception){
-            view.showErrorToast()
-        }finally {
-            view.hideProgressBar()
-        }
-    }
+
 
     fun refreshReviewData(store:Store)=scope.launch {
         try{
@@ -66,7 +57,7 @@ class StoreInformationPresenter(
                 refreshReviewData(store)
                 view.showToastMsg("등록이 완료되었습니다.")
             }catch(e:NullUserException){
-                view.showToastMsg("로그인 되어 있지 않거나, 에러가 발생하였습니다.")
+                view.showToastMsg("로그인 후 이용 가능합니다.")
             }catch(e:Exception){
                 view.showErrorToast()
             }finally {
@@ -83,7 +74,7 @@ class StoreInformationPresenter(
                 view.showToastMsg("관심 목록에 추가되었습니다.")
                 view.buttonSelected()
             }catch(e:NullUserException){
-                view.showToastMsg("로그인 되어 있지 않거나, 에러가 발생하였습니다.")
+                view.showToastMsg("로그인 후 이용 가능합니다.")
             }catch(e:Exception){
                 view.showErrorToast()
             }finally {
@@ -99,7 +90,7 @@ class StoreInformationPresenter(
                 deleteWishStore(store)
                 view.buttonReleased()
             }catch(e:NullUserException){
-                view.showToastMsg("로그인 되어 있지 않거나, 에러가 발생하였습니다.")
+                view.showToastMsg("로그인 후 이용 가능합니다.")
             }catch(e:Exception){
                 view.showErrorToast()
             }finally {
@@ -119,7 +110,7 @@ class StoreInformationPresenter(
                     view.buttonReleased()
                 }
             }catch(e:NullUserException){
-                view.showToastMsg("로그인 되어 있지 않거나, 에러가 발생하였습니다.")
+
             }catch(e:Exception){
                 view.showErrorToast()
             }finally {

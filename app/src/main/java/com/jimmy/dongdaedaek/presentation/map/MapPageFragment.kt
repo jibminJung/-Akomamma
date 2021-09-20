@@ -135,6 +135,7 @@ class MapPageFragment : ScopeFragment(), MapPageContract.View, OnMapReadyCallbac
                         subCaptionText = store.rating?.take(4)!!
                         tag = store
                         isHideCollidedCaptions = true
+                        isHideCollidedSymbols = true
                         map = naverMap
                         setOnClickListener { overlay ->
                             val mark = overlay as Marker

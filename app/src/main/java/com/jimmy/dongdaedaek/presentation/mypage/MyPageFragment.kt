@@ -1,5 +1,6 @@
 package com.jimmy.dongdaedaek.presentation.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import com.jimmy.dongdaedaek.FontLicenseActivity
 import com.jimmy.dongdaedaek.databinding.FragmentMyPageBinding
 import com.jimmy.dongdaedaek.extension.toGone
 import com.jimmy.dongdaedaek.extension.toVisible
@@ -49,6 +52,16 @@ class MyPageFragment : ScopeFragment(), MyPageContract.View {
         binding?.wishStoreListButton?.setOnClickListener {
             findNavController().navigate(MyPageFragmentDirections.toWishList())
         }
+
+        binding?.ossLicenses?.setOnClickListener {
+            OssLicensesMenuActivity.setActivityTitle("오픈소스 라이센스")
+            startActivity(Intent(requireContext(), OssLicensesMenuActivity::class.java))
+        }
+        binding?.fontLicense?.setOnClickListener {
+            startActivity(Intent(requireContext(),FontLicenseActivity::class.java))
+        }
+
+
 
     }
 

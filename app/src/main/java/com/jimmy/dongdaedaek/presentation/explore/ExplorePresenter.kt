@@ -1,6 +1,7 @@
 package com.jimmy.dongdaedaek.presentation.explore
 
 import android.util.Log
+import com.google.firebase.auth.FirebaseAuth
 import com.jimmy.dongdaedaek.data.repository.CategoryRepository
 import com.jimmy.dongdaedaek.domain.usecase.*
 import kotlinx.coroutines.CoroutineScope
@@ -9,6 +10,7 @@ import kotlinx.coroutines.launch
 
 class ExplorePresenter(
     private val view: ExploreContract.View,
+    val firebaseAuth: FirebaseAuth,
     val categoryRepository: CategoryRepository,
     val getStoresUseCase: GetStoresUseCase,
     val checkLinkAndLogin: CheckLinkAndLoginUseCase,
@@ -55,14 +57,23 @@ class ExplorePresenter(
         }
     }
 
+    override fun goToAddStorePage() {
+        if (firebaseAuth.currentUser != null) {
+            view.goToAddStorePage()
+        }else{
+            view.showToastMsg("로그인 후 등록 가능합니다.")
+        }
+
+    }
+
     override fun fetchFilteredStore(checkedCategory: MutableList<String>) {
         scope.launch {
             try {
                 view.showProgressBar()
-                if(checkedCategory.isEmpty()){
+                if (checkedCategory.isEmpty()) {
                     val stores = getStoresUseCase()
                     view.showStores(stores)
-                }else{
+                } else {
                     val stores = getFilteredStoreUseCase(checkedCategory)
                     view.showStores(stores)
                 }
