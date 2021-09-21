@@ -99,6 +99,7 @@ class MapPageFragment : ScopeFragment(), MapPageContract.View, OnMapReadyCallbac
                 text = it.second
                 isCheckable = true
                 tag = it.first
+                setTextAppearanceResource(R.style.ChipStyleNew)
                 setOnCheckedChangeListener(onCheckedListener)
             })
         }

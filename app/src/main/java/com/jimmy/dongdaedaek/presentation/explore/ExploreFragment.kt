@@ -85,6 +85,9 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
                 text = it.second
                 isCheckable = true
                 tag = it.first
+                elevation = 2F
+                setTextAppearanceResource(R.style.ChipStyleNew)
+                setChipBackgroundColorResource(R.color.white)
                 setOnCheckedChangeListener{ _, _ ->
                     binding?.categoryChipGroup?.checkedChipIds?.let { idList ->
                         presenter.fetchFilteredStore(

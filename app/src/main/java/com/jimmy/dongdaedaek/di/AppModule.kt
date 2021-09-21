@@ -108,6 +108,7 @@ val domainModule = module {
     factory { DeleteWishStoreUseCase(get(),get()) }
     factory { CheckUserWishStoreUseCase(get(),get()) }
     factory { LoadWishStoreListUseCase(get(),get()) }
+    factory { RegisterCategoryUseCase(get()) }
 }
 val presenterModule = module {
     scope<ExploreFragment> {
@@ -137,7 +138,7 @@ val presenterModule = module {
     }
 
     scope<AddStoreFragment> {
-        scoped<AddStoreContract.Presenter> { AddStorePresenter(getSource(), get(), get()) }
+        scoped<AddStoreContract.Presenter> { AddStorePresenter(getSource(), get(), get(),get()) }
     }
 
     scope<SelectLocationFragment> {

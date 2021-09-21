@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
+import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.ItemStoreBinding
 import com.jimmy.dongdaedaek.domain.model.Store
 import com.jimmy.dongdaedaek.extension.toGone
@@ -61,6 +62,8 @@ class ExploreAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 binding.storeCategoryChipGroup.addView(Chip(binding.root.context).apply {
                     text = it
                     isClickable = false
+                    rippleColor = null
+                    setTextAppearanceResource(R.style.ChipStyleNew)
                 })
             }
         }

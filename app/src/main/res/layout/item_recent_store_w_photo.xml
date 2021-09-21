@@ -33,13 +33,15 @@
                 android:layout_marginBottom="7dp"
                 android:background="@drawable/rounded_corner_background_white"
                 android:maxLines="1"
+                android:textColor="@color/black"
+                android:paddingVertical="2dp"
                 android:paddingHorizontal="10dp"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/rating_icon_text_view"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toStartOf="parent"
-                tools:text="Hobanjung" />
+                tools:text="Hello world" />
 
             <LinearLayout
                 android:id="@+id/rating_icon_text_view"

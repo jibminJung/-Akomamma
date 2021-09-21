@@ -17,6 +17,7 @@
         <activity
             android:name=".presentation.MainActivity"
             android:exported="true"
+            android:theme="@style/Splash.theme"
             android:screenOrientation="portrait"
             android:label="아코맘마">
             <intent-filter>

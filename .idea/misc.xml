@@ -19,9 +19,11 @@
         <entry key="app/src/main/res/drawable/ic_gray_border_background.xml" value="0.17291666666666666" />
         <entry key="app/src/main/res/drawable/ic_heart_icon.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/drawable/ic_heart_selector.xml" value="0.140625" />
+        <entry key="app/src/main/res/drawable/ic_launcher.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/ic_red_heart_icon.xml" value="0.140625" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_forward_ios_24.xml" value="0.153125" />
         <entry key="app/src/main/res/drawable/rounded_corner_background_white.xml" value="0.14270833333333333" />
+        <entry key="app/src/main/res/drawable/splash.xml" value="0.22777777777777777" />
         <entry key="app/src/main/res/drawable/upload_review_selector.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/font/bm_font_family.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/activity_font_license.xml" value="0.18703703703703703" />

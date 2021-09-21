@@ -15,6 +15,7 @@ interface AddStoreContract {
     }
 
     interface Presenter:BasePresenter{
+        fun registerNewCategory(newCategoryName:MutableList<String>)
         fun registerStore(name:String,address:String,latlng:LatLng,categoryIds:MutableList<String>)
     }
 }

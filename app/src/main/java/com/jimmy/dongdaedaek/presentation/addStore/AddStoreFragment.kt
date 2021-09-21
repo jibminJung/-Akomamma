@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.view.iterator
@@ -64,8 +65,35 @@ class AddStoreFragment : ScopeFragment(), AddStoreContract.View {
             }
         }
 
+        binding?.addTagEditTextView?.apply {
+            setOnFocusChangeListener { view, b ->
+                if (!b) {
+                    Log.d("hide keyboard", "EditText UnFocused")
+                    val imm: InputMethodManager =
+                        context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(view.windowToken, 0)
+                }
+            }
+
+            setOnEditorActionListener { v, actionId, _ ->
+                return@setOnEditorActionListener when (actionId) {
+                    EditorInfo.IME_ACTION_DONE -> {
+                        binding?.categoryChipGroup?.addView(Chip(context).apply {
+                            text = v.editableText.toString()
+                            isCheckable = true
+                            isChecked = true
+                        },2)
+                        v.text = ""
+                        v.clearFocus()
+                        true
+                    }
+                    else -> false
+                }
+            }
+        }
         binding?.root?.setOnClickListener {
             binding?.storeNameEditText?.clearFocus()
+            binding?.addTagEditTextView?.clearFocus()
         }
 
         binding?.registerStoreButton?.setOnClickListener {
@@ -82,18 +110,24 @@ class AddStoreFragment : ScopeFragment(), AddStoreContract.View {
                 return@setOnClickListener
             }
             Log.d("register..", "button clicked null pass")
-            val categoryIds: MutableList<String> = mutableListOf()
+            val seletedCategoryName: MutableList<String> = mutableListOf()
+            val newCategoryName: MutableList<String> = mutableListOf()
             binding?.categoryChipGroup?.iterator()?.forEach {
-                if ((it as Chip).isChecked) {
-                    categoryIds.add(it.text.toString())
-                    Log.d("register..", "categoryIds ${it.tag}")
+                val chip = it as? Chip
+                if (chip?.isChecked == true) {
+                    seletedCategoryName.add(chip.text.toString())
+                    if(chip.tag == null){
+                        newCategoryName.add(chip.text.toString())
+                    }
+                    Log.d("register..", "categoryIds ${it.tag?:"null tag"}")
                 }
             }
-            if (categoryIds.isEmpty()) {
+            if (seletedCategoryName.isEmpty()) {
                 makeToast("태그를 지정해주세요 (여러개)")
             }
 
-            presenter.registerStore(name, address, latlng, categoryIds)
+            presenter.registerNewCategory(newCategoryName)
+            presenter.registerStore(name, address, latlng, seletedCategoryName)
 
         }
     }
@@ -104,6 +138,7 @@ class AddStoreFragment : ScopeFragment(), AddStoreContract.View {
                 text = it.second
                 isCheckable = true
                 tag = it.first
+                setTextAppearanceResource(R.style.ChipStyleNew)
             })
         }
 
@@ -122,6 +157,10 @@ class AddStoreFragment : ScopeFragment(), AddStoreContract.View {
     }
 
     override fun navigateToStore(store: Store) {
-        findNavController().navigate(AddStoreFragmentDirections.toStoreInformationActionInclusive(store))
+        findNavController().navigate(
+            AddStoreFragmentDirections.toStoreInformationActionInclusive(
+                store
+            )
+        )
     }
 }
