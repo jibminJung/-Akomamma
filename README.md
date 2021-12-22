@@ -1,4 +1,4 @@
-# dongdaedaek
+# Akomamma
 
 ## 사용 기술
   + Android kotlin
