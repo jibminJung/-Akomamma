@@ -7,6 +7,7 @@
   + MVP Structure
   + Google Firebase (Auth, Firestore)
   + Naver Map Api
+  + Jetpack Navigation
  --------
 
 ## 앱 개요
