@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.jimmy.dongdaedaek.databinding.ItemReviewImageBinding
@@ -22,6 +23,7 @@ class ReviewPhotoAdapter : RecyclerView.Adapter<ReviewPhotoAdapter.ReviewPhotoVi
         fun bind(url: String) {
             Glide.with(binding.root.context)
                 .load(url)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .thumbnail(0.1f)
                 .transform(CenterCrop(),RoundedCorners(16))
                 .into(binding.photoImageView)

@@ -62,7 +62,7 @@ val dataModule = module {
     single<ReviewRepository> { ReviewRepositoryImpl(get(), get()) }
     single { TmapRepository(get(), get()) }
     single { CategoryRepository(get(), get()) }
-    single { ImageRepository(get(), get()) }
+    single { ImageRepository(get(), get(),androidContext()) }
     single {WishStoreRepository(get(),get())}
 
     // Api

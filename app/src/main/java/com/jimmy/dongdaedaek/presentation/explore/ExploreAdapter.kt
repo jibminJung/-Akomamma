@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.chip.Chip
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.ItemStoreBinding
@@ -51,6 +52,7 @@ class ExploreAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             item.recentPhoto?.let{
                 Glide.with(binding.root)
                     .load(item.recentPhoto)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .centerCrop()
                     .into(binding.storeImageView)
 

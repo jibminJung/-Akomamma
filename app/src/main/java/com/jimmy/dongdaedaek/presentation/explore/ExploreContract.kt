@@ -6,7 +6,7 @@ import com.jimmy.dongdaedaek.presentation.BasePresenter
 import com.jimmy.dongdaedaek.presentation.BaseView
 
 interface ExploreContract {
-    interface View:BaseView<BasePresenter>{
+    interface View:BaseView<Presenter>{
         fun showProgressBar()
         fun hideProgressBar()
         fun showStores(stores:List<Store>)

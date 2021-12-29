@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.jimmy.dongdaedaek.databinding.ItemRecentStoreWPhotoBinding
 import com.jimmy.dongdaedaek.databinding.ItemRecentStoreWoPhotoBinding
@@ -72,6 +73,7 @@ class RecentReviewAdapter(
             if (item.photos?.isNotEmpty() == true) {
                 Glide.with(binding.root.context)
                     .load(item.photos?.first())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .transform(CenterCrop())
                     .thumbnail(0.1F)
                     .into(binding.recentReviewPhotoImageView)

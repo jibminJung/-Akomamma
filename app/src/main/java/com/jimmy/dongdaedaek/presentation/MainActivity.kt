@@ -38,14 +38,14 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setupWithNavController(navigationController)
     }
     fun bindView(){
-        navigationController.addOnDestinationChangedListener { _, destination, _ ->
-            if(destination.id == R.id.navigation_store_information) {
-
-                binding.navView.visibility = View.GONE
-            } else {
-
-                binding.navView.visibility = View.VISIBLE
-            }
-        }
+//        navigationController.addOnDestinationChangedListener { _, destination, _ ->
+//            if(destination.id == R.id.navigation_store_information) {
+//
+//                binding.navView.visibility = View.GONE
+//            } else {
+//
+//                binding.navView.visibility = View.VISIBLE
+//            }
+//        }
     }
 }

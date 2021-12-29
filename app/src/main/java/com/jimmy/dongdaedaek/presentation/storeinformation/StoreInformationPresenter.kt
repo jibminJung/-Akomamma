@@ -49,7 +49,7 @@ class StoreInformationPresenter(
             try {
                 view.showProgressBar()
                 val downloadUrls= data?.let{
-                    view.showToastMsg("업로드 중..")
+                    view.showToastMsg("사진을 압축하고 업로드합니다..!")
                     uploadPhotosUseCase(data)
                 }
                 uploadReviewUseCase(store.id!!, content,rating,downloadUrls)

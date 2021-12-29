@@ -27,7 +27,7 @@
         <entry key="app/src/main/res/drawable/upload_review_selector.xml" value="0.17760416666666667" />
         <entry key="app/src/main/res/font/bm_font_family.xml" value="0.15677083333333333" />
         <entry key="app/src/main/res/layout/activity_font_license.xml" value="0.18703703703703703" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_add_store.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.1925925925925926" />
