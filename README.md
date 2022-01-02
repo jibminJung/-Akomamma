@@ -5,6 +5,7 @@
   + Coroutine
   + Retrofit2
   + MVP Structure
+  + ViewModel
   + Google Firebase (Auth, Firestore)
   + Naver Map Api
   + Jetpack Navigation
