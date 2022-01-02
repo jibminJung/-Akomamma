@@ -136,6 +136,7 @@
     <fragment
         android:id="@+id/new_explore"
         android:label="새로운 탐색"
+        android:name="com.jimmy.dongdaedaek.presentation.newexplore.ExploreFragment"
         >
 
     </fragment>

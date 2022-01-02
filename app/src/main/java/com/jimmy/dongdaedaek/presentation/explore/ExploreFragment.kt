@@ -70,13 +70,13 @@ class ExploreFragment : ScopeFragment(), ExploreContract.View {
 
 
     override fun initViewPager(recentReviews: List<Review>) {
-        val pagerAdapter = RecentReviewAdapter(recentReviews)
-        binding?.viewPagerView?.adapter = pagerAdapter.apply {
-            onClickListener = {
-                presenter.getStoreById(it.storeId!!)
-            }
-        }
-        binding?.viewPagerView?.setCurrentItem(pagerAdapter.itemCount / 2, false)
+//        val pagerAdapter = RecentReviewAdapter(recentReviews)
+//        binding?.viewPagerView?.adapter = pagerAdapter.apply {
+//            onClickListener = {
+//                presenter.getStoreById(it.storeId!!)
+//            }
+//        }
+//        binding?.viewPagerView?.setCurrentItem(pagerAdapter.itemCount / 2, false)
     }
 
     override fun initCategory(categories: List<Pair<String, String>>) {

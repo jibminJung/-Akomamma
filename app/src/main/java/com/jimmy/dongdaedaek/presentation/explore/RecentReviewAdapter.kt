@@ -11,8 +11,9 @@ import com.jimmy.dongdaedaek.databinding.ItemRecentStoreWoPhotoBinding
 import com.jimmy.dongdaedaek.domain.model.Review
 
 class RecentReviewAdapter(
-    val data: List<Review>
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    var data :List<Review> = mutableListOf()
 
     var onClickListener: ((Review) -> Unit)? = null
 
