@@ -9,9 +9,16 @@ import androidx.navigation.ui.setupWithNavController
 import com.jimmy.dongdaedaek.BuildConfig
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.ActivityMainBinding
+import com.jimmy.dongdaedaek.domain.usecase.CheckLinkAndLoginUseCase
 import com.naver.maps.map.NaverMapSdk
+import kotlinx.coroutines.*
+import org.koin.android.ext.android.inject
+import org.koin.android.scope.scope
+import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity() {
+class MainActivity() : AppCompatActivity() {
+
+    val checkLogin:CheckLinkAndLoginUseCase by inject<CheckLinkAndLoginUseCase>()
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val navigationController by lazy{
@@ -28,6 +35,22 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        checkLoginIntent()
+
+    }
+    private fun checkLoginIntent(){
+        MainScope().launch {
+            intent?.data?.let {
+                checkLogin(intent.data.toString())
+                intent.data = null
+            }
+        }
+    }
+
+
 
     fun initView(){
 //        val appBarConfiguration = AppBarConfiguration(

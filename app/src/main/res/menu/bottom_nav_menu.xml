@@ -16,9 +16,5 @@
         android:icon="@drawable/ic_outline_person_24"
         android:title="My" />
 
-    <item
-        android:id="@+id/new_explore"
-        android:icon="@drawable/ic_outline_person_24"
-        android:title="New" />
 
 </menu>

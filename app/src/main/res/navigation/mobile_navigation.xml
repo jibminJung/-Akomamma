@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_explore"
-        android:name="com.jimmy.dongdaedaek.presentation.explore.ExploreFragment"
+        android:name="com.jimmy.dongdaedaek.presentation.newexplore.ExploreFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_explore">
 
@@ -138,6 +138,19 @@
         android:label="새로운 탐색"
         android:name="com.jimmy.dongdaedaek.presentation.newexplore.ExploreFragment"
         >
+        <action
+            android:id="@+id/to_store_information_action"
+            app:destination="@id/navigation_store_information"
+            app:enterAnim="@anim/enter_sliding">
+            <argument
+                android:name="store"
+                app:argType="com.jimmy.dongdaedaek.domain.model.Store"/>
+        </action>
+        <action
+            android:id="@+id/to_add_store_action"
+            app:destination="@id/navigation_add_store"
+            app:enterAnim="@anim/fade_in"
+            />
 
     </fragment>
 

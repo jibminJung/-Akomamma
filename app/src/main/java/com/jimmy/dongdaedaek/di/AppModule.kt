@@ -15,9 +15,6 @@ import com.jimmy.dongdaedaek.domain.usecase.*
 import com.jimmy.dongdaedaek.presentation.addStore.AddStoreContract
 import com.jimmy.dongdaedaek.presentation.addStore.AddStoreFragment
 import com.jimmy.dongdaedaek.presentation.addStore.AddStorePresenter
-import com.jimmy.dongdaedaek.presentation.explore.ExploreContract
-import com.jimmy.dongdaedaek.presentation.explore.ExploreFragment
-import com.jimmy.dongdaedaek.presentation.explore.ExplorePresenter
 import com.jimmy.dongdaedaek.presentation.map.MapPageContract
 import com.jimmy.dongdaedaek.presentation.map.MapPageFragment
 import com.jimmy.dongdaedaek.presentation.map.MapPagePresenter
@@ -114,20 +111,7 @@ val domainModule = module {
 }
 val presenterModule = module {
     viewModel { ExploreViewModel(get(),get(),get(),get()) }
-    scope<ExploreFragment> {
-        scoped<ExploreContract.Presenter> {
-            ExplorePresenter(
-                getSource(),
-                get(),
-                get(),
-                get(),
-                get(),
-                get(),
-                get(),
-                get()
-            )
-        }
-    }
+
     scope<StoreInformationFragment> {
         scoped<StoreInformationContract.Presenter> { (store: Store) ->
             StoreInformationPresenter(store, getSource(), get(), get(), get(), get(),get(),get(),get())

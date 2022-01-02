@@ -1,4 +1,4 @@
-package com.jimmy.dongdaedaek.presentation.explore
+package com.jimmy.dongdaedaek.presentation.newexplore
 
 import android.annotation.SuppressLint
 import android.util.Log
