@@ -53,8 +53,6 @@ class ExploreViewModel(
         }
         val recentReviews = getRecentReview()
         _recentReviewListLiveData.value = recentReviews
-
-
     }
 
     fun setFilterCondition(filter: MutableList<String>,checkedIds:MutableList<String>) {

@@ -1,7 +1,10 @@
 package com.jimmy.dongdaedaek.presentation.newexplore
 
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.chip.Chip
 import com.jimmy.dongdaedaek.R
 import com.jimmy.dongdaedaek.databinding.FragmentExploreBinding
@@ -21,6 +24,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding>()
     override fun getViewBinding(): FragmentExploreBinding =
         FragmentExploreBinding.inflate(layoutInflater)
 
+
     val reviewAdapter by lazy {
         RecentReviewAdapter().apply {
             onClickListener = {
@@ -31,6 +35,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding>()
                 }
 
             }
+            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.ALLOW
         }
     }
 
@@ -42,12 +47,12 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding>()
                 findNavController().navigate(action)
             }
         }
+
     }
 
     override fun observeData() {
         viewModel.storeListLiveData.observe(viewLifecycleOwner) {
-            storeAdapter.addItem(it)
-            storeAdapter.notifyDataSetChanged()
+            storeAdapter.differ.submitList(it)
             Log.d(TAG, "observeData: adding item ${it.size}")
         }
         viewModel.categoryLiveData.observe(viewLifecycleOwner) { categories ->
@@ -96,6 +101,7 @@ class ExploreFragment : BaseFragment<ExploreViewModel, FragmentExploreBinding>()
             findNavController().navigate(R.id.to_add_store_action)
         }
     }
+
 
     companion object {
         private const val TAG = "ExploreFragment"
